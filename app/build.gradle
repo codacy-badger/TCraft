@@ -1,28 +1,162 @@
 apply plugin: 'com.android.application'
 
-android {
-    compileSdkVersion 26
-    defaultConfig {
-        applicationId "com.tincher.tcraft"
-        minSdkVersion 15
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-}
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-//    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    testImplementation 'junit:junit:4.12'
-//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation project(':tcraftlib')
+
+}
+
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    defaultConfig {
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        ndk { abiFilters "armeabi", "x86" }
+
+//        flavorDimensions "Areas"
+
+    }
+
+    signingConfigs {
+        release {
+
+            // v1、v2 全选即可
+            v1SigningEnabled true
+            v2SigningEnabled true
+
+            // gradle.properties 中统一配置签名文件和密码
+            try {
+                //签名证书文件
+                storeFile file(STORE_FILE)
+
+                // 签名证书密码
+                storePassword STORE_PASSWORD
+
+                // 别名
+                keyAlias KEY_ALIAS
+
+                // 别名密码
+                keyPassword KEY_PASSWORD
+            }
+            catch (ex) {
+                throw new InvalidUserDataException("请在 gradle.properties 配置签名文件\n" + ex.message)
+            }
+        }
+
+        debug {
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+
+
+    buildTypes {
+        release {
+            /**
+             * 自定义字段，在 BuildConfig 中会自动生成相应变量。代码中使用 Build.ISRELEASE 即可获取其值 false
+             */
+            buildConfigField "boolean", "ISRELEASE", "false"
+            /**
+             * 开启混淆
+             */
+            minifyEnabled true
+            /**
+             * 开启Zipalign优化
+             */
+            zipAlignEnabled true
+
+            /**
+             * 移除无用的resource文件，此项只有在开启混淆时才生效
+             */
+            shrinkResources true
+            /**
+             * 使用release证书签名
+             */
+//            signingConfig signingConfigs.release
+
+            /**
+             * 设置混淆配置文件
+             */
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            /**
+             * 重命名apk文件，命名方式：名称+渠道名+版本号+版本名称+打包时间
+             */
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    outputFileName = "${mApplicationName}_${variant.name}_${variant.versionCode}_${variant.versionName}_${releaseTime()}.apk"
+                }
+            }
+        }
+        debug {
+
+            zipAlignEnabled false
+            shrinkResources false
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    outputFileName = "${mApplicationName}_${variant.name}_${variant.versionCode}_${variant.versionName}_${releaseTime()}.apk"
+                }
+            }
+        }
+    }
+
+
+    productFlavors {
+//        HeKou10 {
+//            flavorDimensions "Areas"
+//            buildConfigField "String", "FLAVOR_NAME", "\"HeKou10\""
+//
+//            applicationId "com.tincher.hkperformance.HeKou10"
+//            versionCode rootProject.ext.android.versionCode_HeKou
+//            versionName rootProject.ext.android.versionName_HeKou
+//
+//        }
+
+    }
+
+    packagingOptions {
+        exclude 'proguard-project.txt'
+        exclude 'project.properties'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/DEPENDENCIES'
+    }
+}
+
+/**
+ * 当前时间
+ * @return
+ */
+static def releaseTime() {
+    return new Date().format("yyyy-MM-dd_HHmmss", TimeZone.getTimeZone("GMT+8:00"))
+}
+
+/**
+ * 获取 git commit id，通常只有在更细粒度的版本控制中使用，如热修复
+ * @return
+ */
+def gitSha() {
+    try {
+        String gitRev = 'git rev-parse --short HEAD'.execute(null, project.rootDir).text.trim()
+        if (gitRev == null) {
+            throw new GradleException("无法执行 git rev-parse 命令，请检查是否添加 git 到系统变量")
+        }
+        return gitRev
+    } catch (Exception e) {
+        throw new GradleException("无法执行 git rev-parse 命令，请检查是否添加 git 到系统变量")
+    }
 }

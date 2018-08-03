@@ -1,0 +1,75 @@
+apply plugin: 'com.android.library'
+
+
+
+
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    testApi 'junit:junit:4.12'
+
+    api rootProject.ext.supportDependencies.supportAppcompat
+    api rootProject.ext.supportDependencies.supportV4
+    api rootProject.ext.supportDependencies.supportDesign
+    api rootProject.ext.supportDependencies.supportConstraintLayout
+
+    api rootProject.ext.thirdDependencies.easypermissions
+    api rootProject.ext.thirdDependencies.utilcode
+    api rootProject.ext.thirdDependencies.eventbus
+    api rootProject.ext.thirdDependencies.glide
+
+
+    debugApi rootProject.ext.thirdDependencies.debugLeakcanary
+    releaseApi rootProject.ext.thirdDependencies.releaseLeakcanary
+
+    debugApi rootProject.ext.thirdDependencies.debugChuck
+    releaseApi rootProject.ext.thirdDependencies.releaseChuck
+
+    api rootProject.ext.thirdDependencies.retrofit
+    api rootProject.ext.thirdDependencies.adapterRxjava2
+    api rootProject.ext.thirdDependencies.retrofitGson
+
+
+
+}
+
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCodeLib
+        versionName rootProject.ext.android.versionNameLib
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk { abiFilters "armeabi", "x86" }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    /**
+     * 引用的三方库会带有一些配置文件如 xxxx.properties,或者license信息，打包的时候去掉这些信息
+     */
+    packagingOptions {
+        exclude 'proguard-project.txt'
+        exclude 'project.properties'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LGPL2.1'
+    }
+
+}
+
