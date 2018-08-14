@@ -146,7 +146,7 @@ static def releaseTime() {
 }
 
 /**
- * 获取 git commit id，通常只有在更细粒度的版本控制中使用，如热修复
+ * 获取 git commit id，通常只有在更细粒度的版本控制中使用
  * @return
  */
 def gitSha() {
