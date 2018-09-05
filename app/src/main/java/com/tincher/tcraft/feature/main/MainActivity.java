@@ -1,15 +1,23 @@
 package com.tincher.tcraft.feature.main;
 
-import android.os.Bundle;
-
 import com.tincher.tcraft.R;
-import com.tincher.tcraftlib.base.BaseActivity;
+import com.tincher.tcraftlib.base.BaseHttpActivity;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseHttpActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int initLayout() {
+        return R.layout.activity_main;
     }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+    }
+
+
 }

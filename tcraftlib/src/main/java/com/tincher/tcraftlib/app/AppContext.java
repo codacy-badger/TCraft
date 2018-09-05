@@ -1,10 +1,23 @@
 package com.tincher.tcraftlib.app;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 
 /**
  * Created by dks on 2018/8/3.
  */
 
-public class AppContext extends Application {
+ public class AppContext extends Application {
+    @SuppressLint("StaticFieldLeak")
+    private static Application mAppContext;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mAppContext = this;
+    }
+
+    public static Application getmAppContext() {
+        return mAppContext;
+    }
 }

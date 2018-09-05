@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TCraftLib</string>
+
+    <string name="dialog_permission_ok_notifyTitle">提示</string>
+    <string name="dialog_permission_ok_notifyMsg">当前应用缺少必要权限。\n\n请\"允许\"相应权限，确保应用正常运行。</string>
+    <string name="dialog_permission_ok_setting">确定</string>
+    <string name="dialog_permission_ok_cancel">取消</string>
 </resources>

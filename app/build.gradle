@@ -8,6 +8,7 @@ dependencies {
 
 }
 
+def mApplicationName = rootProject.ext.android.applicationName
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
