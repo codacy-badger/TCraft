@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.tincher.tcraft.feature.main.MainActivity">
 
     <TextView
@@ -11,5 +12,39 @@
         android:layout_height="wrap_content"
         android:text="Hello World!"
  />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:rating="2"
+        style="@android:style/Widget.DeviceDefault.RatingBar"
+        />
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:rating="3"
+        android:isIndicator="true"
+        style="?android:attr/ratingBarStyleSmall"
+        />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:rating="2"
+        android:numStars="4"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_marginTop="6dp"
+        />
+
+
+</LinearLayout>
+
 
 </LinearLayout>

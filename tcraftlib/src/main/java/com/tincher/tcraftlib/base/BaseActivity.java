@@ -18,6 +18,8 @@ import com.tincher.tcraftlib.network.networkstatus.NetInfo;
 import com.tincher.tcraftlib.network.networkstatus.NetworkStateListener;
 import com.tincher.tcraftlib.network.networkstatus.NetworkStateReceiver;
 
+import java.util.Arrays;
+
 import static com.tincher.tcraftlib.app.PermissionsChecker.verifyPermissions;
 
 /**
@@ -33,6 +35,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void initView();
 
     protected abstract void initData();
+
+    protected String[] addCheckPermissions() {
+        return null;
+    }
 
     @Override
     public void onLowMemory() {
@@ -57,7 +63,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (isNeedCheckPermission) {
-            PermissionsChecker.checkPermissions(this, PERMISSION_REQUEST_CODE, PermissionConfig.permissions);
+            String[] comm = PermissionConfig.permissions;
+            String[] add  = addCheckPermissions();
+            String[] result;
+            if (add != null) {
+                result = Arrays.copyOf(comm, comm.length + add.length);
+                System.arraycopy(add, 0, result, comm.length, add.length);
+            } else {
+                result = comm;
+            }
+            PermissionsChecker.checkPermissions(this, PERMISSION_REQUEST_CODE, result);
         }
 
     }
@@ -121,6 +136,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
 
     private static final int PERMISSION_REQUEST_CODE = 0;
+    private              int hasRequest              = 0;
 
     /**
      * 判断是否需要检测，防止不停的弹框
@@ -134,11 +150,16 @@ public abstract class BaseActivity extends AppCompatActivity {
             if (!verifyPermissions(paramArrayOfInt)) {
                 Log.d(TAG, String.valueOf(paramArrayOfInt));
                 showMissingPermissionDialog();
+                hasRequest++;
             } else {
-                isNeedCheckPermission = false;
                 if (null != permissionDialog && permissionDialog.isShowing()) {
                     permissionDialog.dismiss();
                 }
+                isNeedCheckPermission = false;
+            }
+            if (hasRequest >= 3) {
+                showMissingPermissionDialog();
+                isNeedCheckPermission = false;
             }
         }
     }
@@ -147,7 +168,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 显示提示信息
      */
     private AlertDialog.Builder builder;
-    private AlertDialog permissionDialog;
+    private AlertDialog         permissionDialog;
 
     private void showMissingPermissionDialog() {
 

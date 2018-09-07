@@ -46,20 +46,29 @@ public class RetrofitClient {
 
 
     private Retrofit mRetrofit;
-    private String mBaseUrl = "";
+    private String mBaseUrl = "http://dkaishu.com";
 
     private String mLastToken = "";
+    TincherInterceptor tincherInterceptor;
 
     public <T> T createService(Class<T> serviceClass) {
         return createService(serviceClass, null);
     }
 
-
     public <T> T createService(final Class<T> serviceClass, AccessToken accessToken) {
+        return createService(serviceClass, accessToken, null);
+    }
+
+    public <T> T createService(final Class<T> serviceClass, AccessToken accessToken, TincherInterceptorCallback tincherInterceptorCallback) {
         String currentToken = accessToken == null ? "" : accessToken.getAccessToken();
+
 
         if (null == mRetrofit || !mLastToken.equals(currentToken)) {
             mLastToken = currentToken;
+
+            tincherInterceptor = new TincherInterceptor(mLastToken);
+            tincherInterceptor.setInterceptorCallback(tincherInterceptorCallback);
+
             OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
             //
             if (BuildConfig.DEBUG) {
@@ -80,7 +89,7 @@ public class RetrofitClient {
             }
 
             okHttpClientBuilder
-                    .addInterceptor(new Interceptor() {
+/*                    .addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
                             Request         original       = chain.request();
@@ -88,11 +97,10 @@ public class RetrofitClient {
                             requestBuilder.header("token", mLastToken)
                                     .method(original.method(), original.body());
 
-                            //todo Response 拦截监听
-
                             return chain.proceed(requestBuilder.build());
                         }
-                    })
+                    })*/
+                    .addInterceptor(tincherInterceptor)
                     .connectTimeout(NetConfig.CONNECT_TIMEOUT, TimeUnit.SECONDS)
                     .readTimeout(NetConfig.READ_TIMEOUT, TimeUnit.SECONDS)
                     .writeTimeout(NetConfig.WRITE_TIMEOUT, TimeUnit.SECONDS)

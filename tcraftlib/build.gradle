@@ -28,6 +28,7 @@ dependencies {
     api rootProject.ext.thirdDependencies.retrofit
     api rootProject.ext.thirdDependencies.adapterRxjava2
     api rootProject.ext.thirdDependencies.retrofitGson
+    api rootProject.ext.thirdDependencies.rxandroid
 
 
 
