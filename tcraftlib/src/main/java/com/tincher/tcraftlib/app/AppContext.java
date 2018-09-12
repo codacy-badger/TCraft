@@ -3,6 +3,8 @@ package com.tincher.tcraftlib.app;
 import android.annotation.SuppressLint;
 import android.app.Application;
 
+import com.tincher.tcraftlib.utils.DensityHelper;
+
 /**
  * Created by dks on 2018/8/3.
  */
@@ -15,6 +17,7 @@ import android.app.Application;
     public void onCreate() {
         super.onCreate();
         mAppContext = this;
+        DensityHelper.setCustomDensity(mAppContext);
     }
 
     public static Application getmAppContext() {

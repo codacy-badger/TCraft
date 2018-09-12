@@ -35,13 +35,13 @@ public class MainActivity extends BaseHttpActivity {
         RetrofitClient.getInstance().createService(MyService.TestService.class, null, new TincherInterceptorCallback() {
             @Override
             public ResponseBody OnResponse(ResponseBody responseBody) {
-                byte[]    bytes;
-                MediaType mediaType;
+                byte[]       bytes;
+                MediaType    mediaType;
                 ResponseBody newRb = null;
                 try {
                     bytes = responseBody.bytes();
                     mediaType = responseBody.contentType();
-                    newRb = ResponseBody.create(mediaType,bytes );
+                    newRb = ResponseBody.create(mediaType, bytes);
 
                 } catch (IOException e) {
                     e.printStackTrace();

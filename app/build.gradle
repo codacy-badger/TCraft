@@ -1,10 +1,22 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
-
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${rootProject.ext.kotlin}"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:${rootProject.ext.kotlin}"
+    }
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':tcraftlib')
+    implementation rootProject.ext.baseDependencies.kotlin
 
 }
 
@@ -62,10 +74,6 @@ android {
     buildTypes {
         release {
             /**
-             * 自定义字段，在 BuildConfig 中会自动生成相应变量。代码中使用 Build.ISRELEASE 即可获取其值 false
-             */
-            buildConfigField "boolean", "ISRELEASE", "false"
-            /**
              * 开启混淆
              */
             minifyEnabled true
@@ -81,7 +89,7 @@ android {
             /**
              * 使用release证书签名
              */
-//            signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
 
             /**
              * 设置混淆配置文件
@@ -143,7 +151,7 @@ android {
  * @return
  */
 static def releaseTime() {
-    return new Date().format("yyyy-MM-dd_HHmmss", TimeZone.getTimeZone("GMT+8:00"))
+    return new Date().format("yyyyMMdd_HHmmss", TimeZone.getTimeZone("GMT+8:00"))
 }
 
 /**

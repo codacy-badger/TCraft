@@ -2,34 +2,29 @@ apply plugin: 'com.android.library'
 
 
 
-
-
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    testApi 'junit:junit:4.12'
 
     api rootProject.ext.supportDependencies.supportAppcompat
     api rootProject.ext.supportDependencies.supportV4
     api rootProject.ext.supportDependencies.supportDesign
     api rootProject.ext.supportDependencies.supportConstraintLayout
 
-    api rootProject.ext.thirdDependencies.easypermissions
-    api rootProject.ext.thirdDependencies.utilcode
-    api rootProject.ext.thirdDependencies.eventbus
-    api rootProject.ext.thirdDependencies.glide
+    debugApi rootProject.ext.baseDependencies.debugLeakcanary
+    releaseApi rootProject.ext.baseDependencies.releaseLeakcanary
 
+    debugApi rootProject.ext.baseDependencies.debugChuck
+    releaseApi rootProject.ext.baseDependencies.releaseChuck
 
-    debugApi rootProject.ext.thirdDependencies.debugLeakcanary
-    releaseApi rootProject.ext.thirdDependencies.releaseLeakcanary
+    api rootProject.ext.baseDependencies.retrofit
+    api rootProject.ext.baseDependencies.adapterRxjava2
+    api rootProject.ext.baseDependencies.retrofitGson
+    api rootProject.ext.baseDependencies.rxandroid
 
-    debugApi rootProject.ext.thirdDependencies.debugChuck
-    releaseApi rootProject.ext.thirdDependencies.releaseChuck
-
-    api rootProject.ext.thirdDependencies.retrofit
-    api rootProject.ext.thirdDependencies.adapterRxjava2
-    api rootProject.ext.thirdDependencies.retrofitGson
-    api rootProject.ext.thirdDependencies.rxandroid
-
+    api rootProject.ext.extensionDependencies.utilcode
+//    api rootProject.ext.extensionDependencies.glide
+//    api rootProject.ext.extensionDependencies.easypermissions
+//    api rootProject.ext.extensionDependencies.eventbus
 
 
 }
@@ -43,8 +38,6 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCodeLib
         versionName rootProject.ext.android.versionNameLib
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk { abiFilters "armeabi", "x86" }
 

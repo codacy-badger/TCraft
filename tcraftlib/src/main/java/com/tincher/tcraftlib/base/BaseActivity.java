@@ -17,6 +17,7 @@ import com.tincher.tcraftlib.config.PermissionConfig;
 import com.tincher.tcraftlib.network.networkstatus.NetInfo;
 import com.tincher.tcraftlib.network.networkstatus.NetworkStateListener;
 import com.tincher.tcraftlib.network.networkstatus.NetworkStateReceiver;
+import com.tincher.tcraftlib.utils.DensityHelper;
 
 import java.util.Arrays;
 
@@ -47,6 +48,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        DensityHelper.setCustomDensity(BaseActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(initLayout());
         initView();

@@ -65,7 +65,6 @@ public final class TincherInterceptor implements Interceptor {
         if (interceptorCallback != null) {
 
             newResponseBody = interceptorCallback.OnResponse(responseBody);
-            interceptorCallback = null;
         } else {
             newResponseBody = responseBody;
         }

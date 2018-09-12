@@ -38,22 +38,19 @@ ext {
 
     rxandroid = '2.0.2'
 
-    utilcode = '1.11.1'
-
-    eventbus = '3.1.1'
-
-    easypermissions = '1.1.3'
+    retrofit = '2.3.0'
 
     leakcanary = '1.5.4'
 
     chuck = '1.1.0'
 
-    retrofit = '2.3.0'
 
+
+    utilcode = '1.20.1'
+    easypermissions = '1.1.3'
     glide = '3.7.0'
-
+    eventbus = '3.1.1'
     flexbox = '0.3.1'
-
     FastLocation = '0.0.2'
 
     dagger = '2.12'
@@ -67,32 +64,33 @@ ext {
             supportConstraintLayout: "com.android.support.constraint:constraint-layout:${constraint_layout}",
     ]
 
-    thirdDependencies = [
+    baseDependencies = [
             kotlin              : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlin}",
+            rxkotlin            : "io.reactivex.rxjava2:rxkotlin:${rxkotlin}",
+            rxandroid           : "io.reactivex.rxjava2:rxandroid:${rxandroid}",
+            retrofit            : "com.squareup.retrofit2:retrofit:$retrofit",
+            adapterRxjava2      : "com.squareup.retrofit2:adapter-rxjava2:$retrofit",
+            retrofitGson        : "com.squareup.retrofit2:converter-gson:$retrofit",
+
+            // LeakCanary
+            debugLeakcanary     : "com.squareup.leakcanary:leakcanary-android:${leakcanary}",
+            releaseLeakcanary   : "com.squareup.leakcanary:leakcanary-android-no-op:${leakcanary}",
+            //chuck
+            debugChuck          : "com.readystatesoftware.chuck:library:${chuck}",
+            releaseChuck        : "com.readystatesoftware.chuck:library-no-op:${chuck}",
+
+    ]
+
+    extensionDependencies = [
             // 权限
             easypermissions     : "pub.devrel:easypermissions:${easypermissions}",
             // 工具类
             utilcode            : "com.blankj:utilcode:${utilcode}",
             // EventBus
             eventbus            : "org.greenrobot:eventbus:${eventbus}",
-            // RxKotlin
-            rxkotlin            : "io.reactivex.rxjava2:rxkotlin:${rxkotlin}",
-            // RxAndroid
-            rxandroid           : "io.reactivex.rxjava2:rxandroid:${rxandroid}",
+
             // 快速定位
             FastLocation        : "com.github.blisssayyid:FastLocation:${FastLocation}",
-            // LeakCanary
-            debugLeakcanary     : "com.squareup.leakcanary:leakcanary-android:${leakcanary}",
-            releaseLeakcanary   : "com.squareup.leakcanary:leakcanary-android-no-op:${leakcanary}",
-
-            //chuck
-            debugChuck          : "com.readystatesoftware.chuck:library:${chuck}",
-            releaseChuck        : "com.readystatesoftware.chuck:library-no-op:${chuck}",
-
-            // Retrofit series
-            retrofit            : "com.squareup.retrofit2:retrofit:$retrofit",
-            adapterRxjava2      : "com.squareup.retrofit2:adapter-rxjava2:$retrofit",
-            retrofitGson        : "com.squareup.retrofit2:converter-gson:$retrofit",
 
             // Glide
             glide               : "com.github.bumptech.glide:glide:$glide",
