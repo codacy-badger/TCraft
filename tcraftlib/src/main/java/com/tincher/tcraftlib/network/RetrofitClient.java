@@ -1,22 +1,16 @@
 package com.tincher.tcraftlib.network;
 
-import android.annotation.SuppressLint;
-
 import com.readystatesoftware.chuck.ChuckInterceptor;
 import com.tincher.tcraftlib.BuildConfig;
 import com.tincher.tcraftlib.app.AppContext;
 import com.tincher.tcraftlib.config.NetConfig;
 
-import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Authenticator;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.Route;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -26,7 +20,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RetrofitClient {
-    @SuppressLint("StaticFieldLeak")
     private static RetrofitClient INSTANCE = null;
 
     private RetrofitClient() {
@@ -49,17 +42,37 @@ public class RetrofitClient {
     private String mBaseUrl = "http://dkaishu.com";
 
     private String mLastToken = "";
-    TincherInterceptor tincherInterceptor;
+    private TincherInterceptor tincherInterceptor;
+
+//    private List<Interceptor> interceptors = new ArrayList<>();
+//    private int mLastInterceptorSize;
+
+//
+//    public RetrofitClient addInterceptor(Interceptor interceptor) {
+//        interceptors.add(interceptor);
+//        mLastInterceptorSize = interceptors.size();
+//        return getInstance();
+//    }
+
 
     public <T> T createService(Class<T> serviceClass) {
         return createService(serviceClass, null);
     }
 
     public <T> T createService(final Class<T> serviceClass, AccessToken accessToken) {
-        return createService(serviceClass, accessToken, null);
+        return createService(serviceClass, accessToken, null, null);
     }
 
-    public <T> T createService(final Class<T> serviceClass, AccessToken accessToken, TincherInterceptorCallback tincherInterceptorCallback) {
+    public <T> T createService(final Class<T> serviceClass, AccessToken accessToken, List<Interceptor> interceptors) {
+        return createService(serviceClass, accessToken, null, interceptors);
+    }
+
+    public <T> T createService(final Class<T> serviceClass, AccessToken accessToken,TincherInterceptorCallback tincherInterceptorCallback) {
+        return createService(serviceClass, accessToken, tincherInterceptorCallback, null);
+    }
+
+
+    public <T> T createService(final Class<T> serviceClass, AccessToken accessToken, TincherInterceptorCallback tincherInterceptorCallback, List<Interceptor> interceptors) {
         String currentToken = accessToken == null ? "" : accessToken.getAccessToken();
 
 
@@ -86,6 +99,12 @@ public class RetrofitClient {
                         return null;
                     }
                 });*/
+            }
+
+            if (interceptors != null && !interceptors.isEmpty()) {
+                for (Interceptor interceptor : interceptors) {
+                    okHttpClientBuilder.addInterceptor(interceptor);
+                }
             }
 
             okHttpClientBuilder

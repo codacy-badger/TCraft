@@ -12,7 +12,7 @@ package com.tincher.tcraftlib.network;
  * Created by dks on 2018/a4/26.
  */
 
-class AccessToken {
+public class AccessToken {
     /**
      * 授权标志
      */
