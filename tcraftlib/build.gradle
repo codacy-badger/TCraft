@@ -22,6 +22,8 @@ dependencies {
     api rootProject.ext.baseDependencies.rxandroid
 
     api rootProject.ext.extensionDependencies.utilcode
+    api rootProject.ext.extensionDependencies.baseQuickAdapter
+
 //    api rootProject.ext.extensionDependencies.glide
 //    api rootProject.ext.extensionDependencies.easypermissions
 //    api rootProject.ext.extensionDependencies.eventbus

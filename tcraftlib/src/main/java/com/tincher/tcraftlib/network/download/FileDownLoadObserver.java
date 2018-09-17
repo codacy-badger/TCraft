@@ -82,7 +82,7 @@ public abstract class FileDownLoadObserver<T> extends DefaultObserver<T> {
             return FileUtils.getFileByPath(downloadFilePath);
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e("saveFile", e.getMessage());
+//            Log.e("saveFile", e.getMessage());
             return null;
         } finally {
             CloseUtils.closeIO(is, os);

@@ -3,14 +3,18 @@ package com.tincher.tcraftlib.network;
 import com.readystatesoftware.chuck.ChuckInterceptor;
 import com.tincher.tcraftlib.BuildConfig;
 import com.tincher.tcraftlib.app.AppContext;
+import com.tincher.tcraftlib.app.TLibManager;
 import com.tincher.tcraftlib.config.NetConfig;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -32,27 +36,11 @@ public class RetrofitClient {
         return INSTANCE;
     }
 
-/*    public static void init(Application mAppContext, String baseUrl) {
-        getInstance().mAppContext = mAppContext;
-
-    }*/
-
-
     private Retrofit mRetrofit;
-    private String mBaseUrl = "http://dkaishu.com";
+    private String mBaseUrl = TLibManager.baseUrl;
 
     private String mLastToken = "";
     private TincherInterceptor tincherInterceptor;
-
-//    private List<Interceptor> interceptors = new ArrayList<>();
-//    private int mLastInterceptorSize;
-
-//
-//    public RetrofitClient addInterceptor(Interceptor interceptor) {
-//        interceptors.add(interceptor);
-//        mLastInterceptorSize = interceptors.size();
-//        return getInstance();
-//    }
 
 
     public <T> T createService(Class<T> serviceClass) {
@@ -67,7 +55,7 @@ public class RetrofitClient {
         return createService(serviceClass, accessToken, null, interceptors);
     }
 
-    public <T> T createService(final Class<T> serviceClass, AccessToken accessToken,TincherInterceptorCallback tincherInterceptorCallback) {
+    public <T> T createService(final Class<T> serviceClass, AccessToken accessToken, TincherInterceptorCallback tincherInterceptorCallback) {
         return createService(serviceClass, accessToken, tincherInterceptorCallback, null);
     }
 
@@ -108,7 +96,7 @@ public class RetrofitClient {
             }
 
             okHttpClientBuilder
-/*                    .addInterceptor(new Interceptor() {
+                    .addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
                             Request         original       = chain.request();
@@ -118,7 +106,7 @@ public class RetrofitClient {
 
                             return chain.proceed(requestBuilder.build());
                         }
-                    })*/
+                    })
                     .addInterceptor(tincherInterceptor)
                     .connectTimeout(NetConfig.CONNECT_TIMEOUT, TimeUnit.SECONDS)
                     .readTimeout(NetConfig.READ_TIMEOUT, TimeUnit.SECONDS)

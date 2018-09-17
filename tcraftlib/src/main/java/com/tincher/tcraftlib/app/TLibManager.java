@@ -5,6 +5,6 @@ package com.tincher.tcraftlib.app;
  */
 
 public class TLibManager {
-    public static String baseUrl ;
+    public static String baseUrl = "http://dkaishu.com";
 
 }

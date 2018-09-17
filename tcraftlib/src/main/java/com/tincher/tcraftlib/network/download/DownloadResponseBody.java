@@ -1,6 +1,7 @@
 package com.tincher.tcraftlib.network.download;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
@@ -56,7 +57,7 @@ public class DownloadResponseBody extends ResponseBody {
                 totalBytesRead += bytesRead != -1 ? bytesRead : 0;
                 if (null != downloadListener) {
                     if (bytesRead != -1) {
-                        downloadListener.onProgress((int) (totalBytesRead * 100 / responseBody.contentLength()));
+                        downloadListener.onProgress((totalBytesRead * 100f / responseBody.contentLength()),responseBody.contentLength());
                     }
                 }
                 return bytesRead;

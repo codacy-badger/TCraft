@@ -46,7 +46,7 @@ public class LoadingDialog extends Dialog {
     }
 
     public void showDialog(){
-        text("加载中");
+//        text("加载中");
         if(null != pb_loading && pb_loading.getVisibility() != View.VISIBLE){
             pb_loading.setVisibility(View.VISIBLE);
         }

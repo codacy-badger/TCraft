@@ -6,6 +6,6 @@ package com.tincher.tcraftlib.network.download;
 
 public interface DownloadListener {
 
-    void onProgress(int progress);
+    void onProgress(float progress,long total);
 
 }

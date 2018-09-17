@@ -6,7 +6,7 @@ import android.os.Message;
 import com.tincher.tcraftlib.widget.LoadingDialog;
 
 /**
- * todo wangluo qingqiu qidong quxiao
+ * todo 取消网络请求
  * Created by dks on 2018/9/5.
  */
 
@@ -18,28 +18,37 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
     private final static int DISMISS_DIALOG = 0x002;
     private final static int LOAD_SUCCEED   = 0x003;
     private final static int LOAD_FAILED    = 0x004;
+    private final static int SET_TEXT       = 0x005;
 
 
-    public void showLoadingDialog(){
+    public void showLoadingDialog() {
         Message msg = new Message();
         msg.what = SHOW_DIALOG;
         getMainHandler().sendMessage(msg);
     }
-    public void dismissLoadingDialog(){
+
+    public void dismissLoadingDialog() {
         Message msg = new Message();
         msg.what = DISMISS_DIALOG;
         getMainHandler().sendMessage(msg);
     }
 
-    public void showLoadingSucceed(){
+    public void showLoadingSucceed() {
         Message msg = new Message();
         msg.what = LOAD_SUCCEED;
         getMainHandler().sendMessage(msg);
     }
 
-    public void showLoadingFailed(){
+    public void showLoadingFailed() {
         Message msg = new Message();
         msg.what = LOAD_FAILED;
+        getMainHandler().sendMessage(msg);
+    }
+
+    public void setLoadingText(String text) {
+        Message msg = new Message();
+        msg.what = SET_TEXT;
+        msg.obj = text;
         getMainHandler().sendMessage(msg);
     }
 
@@ -54,7 +63,6 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
     protected BaseHandler getMainHandler() {
         if (null == mainHandler) {
             mainHandler = new BaseHandler(this, Looper.getMainLooper());
-            mLoadingDialog.setCanceledOnTouchOutside(false);
         }
         return mainHandler;
     }
@@ -63,7 +71,7 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
     public void handleMessage(Message msg) {
         switch (msg.what) {
             case SHOW_DIALOG: {
-                getLoadingDialog().showDialog();
+                getLoadingDialog().text("加载中").showDialog();
                 break;
             }
             case DISMISS_DIALOG: {
@@ -76,6 +84,10 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
             }
             case LOAD_FAILED: {
                 getLoadingDialog().failed();
+                break;
+            }
+            case SET_TEXT: {
+                getLoadingDialog().text((String) msg.obj);
                 break;
             }
         }

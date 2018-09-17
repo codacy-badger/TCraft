@@ -11,7 +11,7 @@
     </style>
     <style name="circleProgressBarStyle">
         <item name="android:indeterminateDrawable">@drawable/rotate_loading_icon</item>
-        <item name="android:indeterminateDuration">1500</item>
+        <item name="android:indeterminateDuration">1200</item>
     </style>
 
 

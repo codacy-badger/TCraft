@@ -5,16 +5,20 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Environment
+import android.os.Looper
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.widget.TextView
 import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.LogUtils
 import com.tincher.tcraft.R
 import com.tincher.tcraftlib.base.BaseHttpActivity
-import com.tincher.tcraftlib.data.DataManager
+import com.tincher.tcraftlib.network.NetworkUtil
 import com.tincher.tcraftlib.network.download.DownloadListener
 import com.tincher.tcraftlib.network.download.FileDownLoadObserver
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
+import java.text.DecimalFormat
 
 
 /**
@@ -22,6 +26,7 @@ import java.io.File
  * Created by dks on 2018/9/12.
  */
 class KMainActivity : BaseHttpActivity() {
+
 
     override fun addCheckPermissions(): Array<out String>? = arrayOf(Manifest.permission.CAMERA)
 
@@ -67,40 +72,46 @@ class KMainActivity : BaseHttpActivity() {
 
     val downloadUrl = "http://ftp-new-apk.pconline.com.cn/417d498f47ad31e3f36e994c47ce20df/pub/download/201808/pconline1534815265261.apk"
     private fun download() {
-        DataManager.download(downloadUrl, Environment.getExternalStorageDirectory().path, "66.apk"
+        showLoadingDialog()
+
+        NetworkUtil.download(downloadUrl, Environment.getExternalStorageDirectory().path, "66.apk"
 
             , object : DownloadListener {
 
-            //            override fun onProgress(progress: Int, total: Long) {
-//                LogUtils.d("onProgress: \ntotal: $total  \nprogress: $progress")
-//
-//            }
-                //Todo int -->float #.00
-            override fun onProgress(progress: Int) {
-                LogUtils.d("onProgress:  \nprogress: $progress")
+                override fun onProgress(progress: Float, total: Long) {
 
+                    val df = DecimalFormat("0.00")
+                    setLoadingText(df.format(progress) + " %")
+
+                }
             }
-
-        }
 
             , object : FileDownLoadObserver<File>() {
-            override fun onDownLoadSuccess(t: File?) {
-                LogUtils.e("onDownLoadSuccess ")
+                override fun onDownLoadSuccess(t: File?) {
+                    LogUtils.e("onDownLoadSuccess ")
+                    Log.d("download", "onDownLoadSuccess: ${Looper.getMainLooper() == Looper.myLooper()}")
+                    dismissLoadingDialog()
+                    AppUtils.installApp(t)
 
-                AppUtils.installApp(t)
+                }
+
+                override fun onDownLoadFail(throwable: Throwable?) {
+                    throwable?.printStackTrace()
+                    LogUtils.e("onDownLoadFail ${throwable?.message}")
+                    Log.d("download", "onDownLoadFail: ${Looper.getMainLooper() == Looper.myLooper()}")
+
+                }
+
+                override fun onSaveProgress(progress: Int, total: Long?) {
+                    Log.d("download", "onSaveProgress: \ntotal: $total  \nprogress: $progress")
+                    TextView(this@KMainActivity)
+                    runOnUiThread(Runnable {
+
+                    })
+
+                }
 
             }
-
-            override fun onDownLoadFail(throwable: Throwable?) {
-                throwable?.printStackTrace()
-                LogUtils.e("onDownLoadFail ${throwable?.message}")
-            }
-
-            override fun onSaveProgress(progress: Int, total: Long?) {
-//                LogUtils.d("onSaveProgress: \ntotal: $total  \nprogress: $progress")
-            }
-
-        }
 
 
         )
