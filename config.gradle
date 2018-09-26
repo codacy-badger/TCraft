@@ -29,7 +29,7 @@ ext {
 
     rxandroid = '2.0.2'
     rxlifecycle2 = '2.2.2'
-    retrofit = '2.3.0'
+    retrofit2 = '2.3.0'
 
     leakcanary = '1.5.4'
 
@@ -60,12 +60,11 @@ ext {
             kotlin               : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlin}",
             rxkotlin             : "io.reactivex.rxjava2:rxkotlin:${rxkotlin}",
             rxandroid            : "io.reactivex.rxjava2:rxandroid:${rxandroid}",
-//            com.trello.rxlifecycle2:rxlifecycle:2.2.2
             rxlifecycle2         : "com.trello.rxlifecycle2:rxlifecycle:${rxlifecycle2}",
             rxlifecycleComponents: "com.trello.rxlifecycle2:rxlifecycle-components:${rxlifecycle2}",
-            retrofit             : "com.squareup.retrofit2:retrofit:$retrofit",
-            adapterRxjava2       : "com.squareup.retrofit2:adapter-rxjava2:$retrofit",
-            retrofitGson         : "com.squareup.retrofit2:converter-gson:$retrofit",
+            retrofit2             : "com.squareup.retrofit2:retrofit:$retrofit2",
+            adapterRxjava2       : "com.squareup.retrofit2:adapter-rxjava2:$retrofit2",
+            retrofitGson         : "com.squareup.retrofit2:converter-gson:$retrofit2",
 
             // LeakCanary
             debugLeakcanary      : "com.squareup.leakcanary:leakcanary-android:${leakcanary}",
@@ -84,15 +83,16 @@ ext {
 
             baseQuickAdapter      : "com.github.CymChad:BaseRecyclerViewAdapterHelper:$quickAdapter",
 
+            // Glide
+            glide                 : "com.github.bumptech.glide:glide:$glide",
+            glideOkhttp3          : "com.github.bumptech.glide:okhttp3-integration:$glide",
+
             // EventBus
             eventbus              : "org.greenrobot:eventbus:${eventbus}",
 
             // 快速定位
             FastLocation          : "com.github.blisssayyid:FastLocation:${FastLocation}",
 
-            // Glide
-            glide                 : "com.github.bumptech.glide:glide:$glide",
-            glideOkhttp3          : "com.github.bumptech.glide:okhttp3-integration:$glide",
 
             // FlexBox layout
             flexbox               : "com.google.android:flexbox:$flexbox",

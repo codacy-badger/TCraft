@@ -8,7 +8,6 @@ import android.os.Environment
 import android.os.Looper
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.widget.TextView
 import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.LogUtils
 import com.tincher.tcraft.R
@@ -17,7 +16,6 @@ import com.tincher.tcraftlib.network.NetworkUtil
 import com.tincher.tcraftlib.network.download.DownloadListener
 import com.tincher.tcraftlib.network.download.FileDownLoadObserver
 import com.tincher.tcraftlib.network.networkstatus.NetInfo
-import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 import java.text.DecimalFormat
@@ -45,9 +43,9 @@ class KMainActivity : BaseHttpActivity() {
 //            showLoadingFailed()
         }
         tv_2.setOnClickListener {
-//            observer.cancel()
+            //            observer.cancel()
             finish()
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 
@@ -140,7 +138,7 @@ class KMainActivity : BaseHttpActivity() {
         )
     }
 
-    override fun onDialogDismiss(){
+    override fun onDialogDismiss() {
 //        observer.cancel()
     }
 
