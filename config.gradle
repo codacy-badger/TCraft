@@ -14,12 +14,12 @@ ext {
             versionCode      : 1,
             versionName      : "1.0.0",
 
-            versionCodeLib      : 1,
-            versionNameLib      : "1.0.0",
+            versionCodeLib   : 1,
+            versionNameLib   : "1.0.0",
 
     ]
 
-    support = '26.1.0'
+    support = '27.1.1'
 
     constraint_layout = '1.0.2'
 
@@ -28,7 +28,7 @@ ext {
     rxkotlin = '2.2.0'
 
     rxandroid = '2.0.2'
-
+    rxlifecycle2 = '2.2.2'
     retrofit = '2.3.0'
 
     leakcanary = '1.5.4'
@@ -57,51 +57,54 @@ ext {
     ]
 
     baseDependencies = [
-            kotlin              : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlin}",
-            rxkotlin            : "io.reactivex.rxjava2:rxkotlin:${rxkotlin}",
-            rxandroid           : "io.reactivex.rxjava2:rxandroid:${rxandroid}",
-            retrofit            : "com.squareup.retrofit2:retrofit:$retrofit",
-            adapterRxjava2      : "com.squareup.retrofit2:adapter-rxjava2:$retrofit",
-            retrofitGson        : "com.squareup.retrofit2:converter-gson:$retrofit",
+            kotlin               : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlin}",
+            rxkotlin             : "io.reactivex.rxjava2:rxkotlin:${rxkotlin}",
+            rxandroid            : "io.reactivex.rxjava2:rxandroid:${rxandroid}",
+//            com.trello.rxlifecycle2:rxlifecycle:2.2.2
+            rxlifecycle2         : "com.trello.rxlifecycle2:rxlifecycle:${rxlifecycle2}",
+            rxlifecycleComponents: "com.trello.rxlifecycle2:rxlifecycle-components:${rxlifecycle2}",
+            retrofit             : "com.squareup.retrofit2:retrofit:$retrofit",
+            adapterRxjava2       : "com.squareup.retrofit2:adapter-rxjava2:$retrofit",
+            retrofitGson         : "com.squareup.retrofit2:converter-gson:$retrofit",
 
             // LeakCanary
-            debugLeakcanary     : "com.squareup.leakcanary:leakcanary-android:${leakcanary}",
-            releaseLeakcanary   : "com.squareup.leakcanary:leakcanary-android-no-op:${leakcanary}",
+            debugLeakcanary      : "com.squareup.leakcanary:leakcanary-android:${leakcanary}",
+            releaseLeakcanary    : "com.squareup.leakcanary:leakcanary-android-no-op:${leakcanary}",
             //chuck
-            debugChuck          : "com.readystatesoftware.chuck:library:${chuck}",
-            releaseChuck        : "com.readystatesoftware.chuck:library-no-op:${chuck}",
+            debugChuck           : "com.readystatesoftware.chuck:library:${chuck}",
+            releaseChuck         : "com.readystatesoftware.chuck:library-no-op:${chuck}",
 
     ]
 
     extensionDependencies = [
             // 权限
-            easypermissions     : "pub.devrel:easypermissions:${easypermissions}",
+            easypermissions       : "pub.devrel:easypermissions:${easypermissions}",
             // 工具类
-            utilcode            : "com.blankj:utilcode:${utilcode}",
+            utilcode              : "com.blankj:utilcode:${utilcode}",
 
             baseQuickAdapter      : "com.github.CymChad:BaseRecyclerViewAdapterHelper:$quickAdapter",
 
             // EventBus
-            eventbus            : "org.greenrobot:eventbus:${eventbus}",
+            eventbus              : "org.greenrobot:eventbus:${eventbus}",
 
             // 快速定位
-            FastLocation        : "com.github.blisssayyid:FastLocation:${FastLocation}",
+            FastLocation          : "com.github.blisssayyid:FastLocation:${FastLocation}",
 
             // Glide
-            glide               : "com.github.bumptech.glide:glide:$glide",
-            glideOkhttp3        : "com.github.bumptech.glide:okhttp3-integration:$glide",
+            glide                 : "com.github.bumptech.glide:glide:$glide",
+            glideOkhttp3          : "com.github.bumptech.glide:okhttp3-integration:$glide",
 
             // FlexBox layout
-            flexbox             : "com.google.android:flexbox:$flexbox",
+            flexbox               : "com.google.android:flexbox:$flexbox",
 
             // 依赖注入 dagger2
-            dagger              : "com.google.dagger:dagger:$dagger",
-            daggerAndroidSupport: "com.google.dagger:dagger-android-support:$dagger",
-            daggerCompiler      : "com.google.dagger:dagger-compiler:$dagger",
-            daggerAndroidProcessor      : "com.google.dagger:dagger-android-processor:$dagger",
+            dagger                : "com.google.dagger:dagger:$dagger",
+            daggerAndroidSupport  : "com.google.dagger:dagger-android-support:$dagger",
+            daggerCompiler        : "com.google.dagger:dagger-compiler:$dagger",
+            daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:$dagger",
 
             /* DataBinding */
-            databinding         : "com.android.databinding:compiler:$databinding"
+            databinding           : "com.android.databinding:compiler:$databinding"
 
     ]
 }

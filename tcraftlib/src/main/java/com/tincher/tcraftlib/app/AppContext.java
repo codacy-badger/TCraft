@@ -3,13 +3,12 @@ package com.tincher.tcraftlib.app;
 import android.annotation.SuppressLint;
 import android.app.Application;
 
-import com.tincher.tcraftlib.utils.DensityHelper;
-
 /**
+ * 全局变量容器
  * Created by dks on 2018/8/3.
  */
 
- public class AppContext extends Application {
+public class AppContext extends Application {
     @SuppressLint("StaticFieldLeak")
     private static Application mAppContext;
 
@@ -17,7 +16,6 @@ import com.tincher.tcraftlib.utils.DensityHelper;
     public void onCreate() {
         super.onCreate();
         mAppContext = this;
-        DensityHelper.setCustomDensity(mAppContext);
     }
 
     public static Application getmAppContext() {

@@ -146,7 +146,7 @@ public class NetworkUtil {
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .safeSubscribe(observer);
+                .subscribe(observer);
 
     }
 

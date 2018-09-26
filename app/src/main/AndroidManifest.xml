@@ -33,25 +33,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".feature.main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".feature.main.KMainActivity" >
+        <activity android:name=".feature.main.MainActivity"
+            android:theme="@style/Theme.Design.NoActionBar">
 <!--            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
         </activity>
+        <activity android:name=".feature.main.KMainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="gA2t" >
+            android:value="gA2t32dMo1tW6pNgBOpfPbvjkL0Gvie8" >
         </meta-data>
         <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"> </service>
     </application>

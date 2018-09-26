@@ -1,16 +1,43 @@
 package com.tincher.tcraftlib.base;
 
+import android.content.DialogInterface;
+import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
 
+import com.tincher.tcraftlib.network.networkstatus.NetInfo;
+import com.tincher.tcraftlib.network.networkstatus.NetworkStateListener;
+import com.tincher.tcraftlib.network.networkstatus.NetworkStateReceiver;
 import com.tincher.tcraftlib.widget.LoadingDialog;
 
 /**
- * todo 取消网络请求
+ * 添加LoadingDialog和网络状态监听
  * Created by dks on 2018/9/5.
  */
 
 public abstract class BaseHttpActivity extends BaseActivity implements BaseHandler.CallBack {
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initNetworkStateListener();
+    }
+
+    @Override
+    protected void onDestroy() {
+        //移除网络状态监听
+        if (null != networkStateListener) {
+            NetworkStateReceiver.removeNetworkStateListener(networkStateListener);
+            NetworkStateReceiver.unRegisterNetworkStateReceiver(this);
+        }
+        if (null != mainHandler) {
+            mainHandler.removeCallbacksAndMessages(null);
+        }
+        super.onDestroy();
+    }
+
+
     private BaseHandler   mainHandler;
     private LoadingDialog mLoadingDialog;
 
@@ -20,6 +47,7 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
     private final static int LOAD_FAILED    = 0x004;
     private final static int SET_TEXT       = 0x005;
 
+    private boolean isSucceedFailedAutoDismiss = true;
 
     public void showLoadingDialog() {
         Message msg = new Message();
@@ -33,16 +61,28 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
         getMainHandler().sendMessage(msg);
     }
 
+    public void dismissLoadingDialog(long delayMillis) {
+        Message msg = new Message();
+        msg.what = DISMISS_DIALOG;
+        getMainHandler().sendMessageDelayed(msg, delayMillis);
+    }
+
     public void showLoadingSucceed() {
         Message msg = new Message();
         msg.what = LOAD_SUCCEED;
         getMainHandler().sendMessage(msg);
+        if (isSucceedFailedAutoDismiss) {
+            dismissLoadingDialog(1600);
+        }
     }
 
     public void showLoadingFailed() {
         Message msg = new Message();
         msg.what = LOAD_FAILED;
         getMainHandler().sendMessage(msg);
+        if (isSucceedFailedAutoDismiss) {
+            dismissLoadingDialog(1600);
+        }
     }
 
     public void setLoadingText(String text) {
@@ -56,8 +96,18 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
         if (null == mLoadingDialog) {
             mLoadingDialog = new LoadingDialog(this);
             mLoadingDialog.setCanceledOnTouchOutside(false);
+            mLoadingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    onDialogDismiss();
+                }
+            });
         }
         return mLoadingDialog;
+    }
+
+    protected void onDialogDismiss() {
+
     }
 
     protected BaseHandler getMainHandler() {
@@ -94,11 +144,34 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
     }
 
 
-    @Override
-    protected void onDestroy() {
-        if (null != mainHandler) {
-            mainHandler.removeCallbacksAndMessages(null);
-        }
-        super.onDestroy();
+    /**
+     * * ****************************************************************************************
+     * 网络状态监听器
+     **/
+    private NetworkStateListener networkStateListener;
+
+    /**
+     * 初始化网络状态监听器
+     */
+    private void initNetworkStateListener() {
+        NetworkStateReceiver.registerNetworkStateReceiver(this);
+        networkStateListener = new NetworkStateListener() {
+            @Override
+            public void onNetworkState(boolean isNetworkAvailable, NetInfo netInfo) {
+                BaseHttpActivity.this.onNetworkStateChanged(isNetworkAvailable, netInfo);
+            }
+        };
+        //添加网络状态监听
+        NetworkStateReceiver.addNetworkStateListener(networkStateListener);
     }
+
+    /**
+     * 网络状态
+     *
+     * @param isNetworkAvailable 网络是否可用
+     * @param netInfo            网络信息
+     */
+    protected abstract void onNetworkStateChanged(boolean isNetworkAvailable, NetInfo netInfo);
+
+
 }

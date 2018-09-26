@@ -8,7 +8,7 @@ dependencies {
     api rootProject.ext.supportDependencies.supportAppcompat
     api rootProject.ext.supportDependencies.supportV4
     api rootProject.ext.supportDependencies.supportDesign
-    api rootProject.ext.supportDependencies.supportConstraintLayout
+//    api rootProject.ext.supportDependencies.supportConstraintLayout
 
     debugApi rootProject.ext.baseDependencies.debugLeakcanary
     releaseApi rootProject.ext.baseDependencies.releaseLeakcanary
@@ -20,7 +20,8 @@ dependencies {
     api rootProject.ext.baseDependencies.adapterRxjava2
     api rootProject.ext.baseDependencies.retrofitGson
     api rootProject.ext.baseDependencies.rxandroid
-
+    api rootProject.ext.baseDependencies.rxlifecycle2
+    api rootProject.ext.baseDependencies.rxlifecycleComponents
     api rootProject.ext.extensionDependencies.utilcode
     api rootProject.ext.extensionDependencies.baseQuickAdapter
 

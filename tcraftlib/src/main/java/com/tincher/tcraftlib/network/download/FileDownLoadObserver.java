@@ -1,7 +1,5 @@
 package com.tincher.tcraftlib.network.download;
 
-import android.util.Log;
-
 import com.blankj.utilcode.util.CloseUtils;
 import com.blankj.utilcode.util.FileUtils;
 
@@ -11,16 +9,36 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.concurrent.atomic.AtomicReference;
 
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.internal.disposables.DisposableHelper;
+import io.reactivex.internal.util.EndConsumerHelper;
 import io.reactivex.observers.DefaultObserver;
 import okhttp3.ResponseBody;
 
 /**
- *
  * Created by dks on 2018/9/13.
  */
 
-public abstract class FileDownLoadObserver<T> extends DefaultObserver<T> {
+public abstract class FileDownLoadObserver<T> implements Observer<T> {
+    final AtomicReference<Disposable> s = new AtomicReference<>();
+    @Override
+    public void onSubscribe(@NonNull Disposable s) {
+        if (EndConsumerHelper.setOnce(this.s, s, getClass())) {
+        }
+    }
+
+    /**
+     * Cancels the upstream's disposable.
+     */
+    public final void cancel() {
+        DisposableHelper.dispose(s);
+    }
+
+
     @Override
     public void onNext(T t) {
         onDownLoadSuccess(t);
@@ -38,7 +56,6 @@ public abstract class FileDownLoadObserver<T> extends DefaultObserver<T> {
     public void onComplete() {
 
     }
-
 
     //下载成功的回调
     public abstract void onDownLoadSuccess(T t);

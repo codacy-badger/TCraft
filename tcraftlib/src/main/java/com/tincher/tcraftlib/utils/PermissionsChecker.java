@@ -1,4 +1,4 @@
-package com.tincher.tcraftlib.app;
+package com.tincher.tcraftlib.utils;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;

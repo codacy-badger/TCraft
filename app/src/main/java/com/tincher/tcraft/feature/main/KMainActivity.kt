@@ -16,6 +16,8 @@ import com.tincher.tcraftlib.base.BaseHttpActivity
 import com.tincher.tcraftlib.network.NetworkUtil
 import com.tincher.tcraftlib.network.download.DownloadListener
 import com.tincher.tcraftlib.network.download.FileDownLoadObserver
+import com.tincher.tcraftlib.network.networkstatus.NetInfo
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 import java.text.DecimalFormat
@@ -30,7 +32,7 @@ class KMainActivity : BaseHttpActivity() {
 
     override fun addCheckPermissions(): Array<out String>? = arrayOf(Manifest.permission.CAMERA)
 
-    override fun initLayout(): Int = R.layout.activity_main
+    override fun setLayoutRes(): Int = R.layout.activity_main
 
     override fun initView() {
         tv_1.setOnClickListener {
@@ -39,10 +41,22 @@ class KMainActivity : BaseHttpActivity() {
 
 //            ImageTools.selectPicFromAlbumForResult(this, 1)
             download()
+
+//            showLoadingFailed()
+        }
+        tv_2.setOnClickListener {
+//            observer.cancel()
+            finish()
+            startActivity(Intent(this,MainActivity::class.java))
         }
     }
 
     override fun initData() {
+
+    }
+
+    override fun onNetworkStateChanged(isNetworkAvailable: Boolean, netInfo: NetInfo?) {
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -71,6 +85,36 @@ class KMainActivity : BaseHttpActivity() {
     }
 
     val downloadUrl = "http://ftp-new-apk.pconline.com.cn/417d498f47ad31e3f36e994c47ce20df/pub/download/201808/pconline1534815265261.apk"
+
+    val observer = object : FileDownLoadObserver<File>() {
+
+        override fun onDownLoadSuccess(t: File?) {
+            LogUtils.e("onDownLoadSuccess ")
+            Log.d("download", "onDownLoadSuccess: ${Looper.getMainLooper() == Looper.myLooper()}")
+            dismissLoadingDialog()
+            AppUtils.installApp(t)
+
+        }
+
+        override fun onDownLoadFail(throwable: Throwable?) {
+            showLoadingFailed()
+            throwable?.printStackTrace()
+            LogUtils.e("onDownLoadFail ${throwable?.message}")
+            Log.d("download", "onDownLoadFail: ${Looper.getMainLooper() == Looper.myLooper()}")
+
+        }
+
+        override fun onSaveProgress(progress: Int, total: Long?) {
+            Log.d("download", "onSaveProgress: \ntotal: $total  \nprogress: $progress")
+//            TextView(this@KMainActivity)
+            runOnUiThread(Runnable {
+
+            })
+        }
+
+    }
+
+
     private fun download() {
         showLoadingDialog()
 
@@ -82,39 +126,22 @@ class KMainActivity : BaseHttpActivity() {
 
                     val df = DecimalFormat("0.00")
                     setLoadingText(df.format(progress) + " %")
-
-                }
-            }
-
-            , object : FileDownLoadObserver<File>() {
-                override fun onDownLoadSuccess(t: File?) {
-                    LogUtils.e("onDownLoadSuccess ")
-                    Log.d("download", "onDownLoadSuccess: ${Looper.getMainLooper() == Looper.myLooper()}")
-                    dismissLoadingDialog()
-                    AppUtils.installApp(t)
-
-                }
-
-                override fun onDownLoadFail(throwable: Throwable?) {
-                    throwable?.printStackTrace()
-                    LogUtils.e("onDownLoadFail ${throwable?.message}")
-                    Log.d("download", "onDownLoadFail: ${Looper.getMainLooper() == Looper.myLooper()}")
-
-                }
-
-                override fun onSaveProgress(progress: Int, total: Long?) {
-                    Log.d("download", "onSaveProgress: \ntotal: $total  \nprogress: $progress")
-                    TextView(this@KMainActivity)
                     runOnUiThread(Runnable {
+                        tv_1.text = df.format(progress) + " %"
 
                     })
 
                 }
-
             }
+
+            , observer
 
 
         )
+    }
+
+    override fun onDialogDismiss(){
+//        observer.cancel()
     }
 
 }

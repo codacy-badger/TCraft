@@ -1,9 +1,11 @@
 package com.tincher.tcraft.feature.main;
 
 import android.util.Log;
+import android.widget.TextView;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
+import com.baidu.location.BDNotifyListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.blankj.utilcode.util.LogUtils;
@@ -12,6 +14,7 @@ import com.tincher.tcraft.data.MyService;
 import com.tincher.tcraftlib.base.BaseHttpActivity;
 import com.tincher.tcraftlib.network.RetrofitClient;
 import com.tincher.tcraftlib.network.TincherInterceptorCallback;
+import com.tincher.tcraftlib.network.networkstatus.NetInfo;
 
 import java.io.IOException;
 
@@ -26,11 +29,12 @@ public class MainActivity extends BaseHttpActivity {
     private static final String TAG = "MainActivity";
 
     @Override
-    protected int initLayout() {
+    protected int setLayoutRes() {
         return R.layout.activity_main;
     }
 
     public LocationClient mLocationClient = null;
+
     @Override
     protected void initView() {
         mLocationClient = new LocationClient(getApplicationContext());
@@ -40,13 +44,17 @@ public class MainActivity extends BaseHttpActivity {
             public void onReceiveLocation(BDLocation bdLocation) {
                 LogUtils.e(bdLocation.getAltitude());
                 LogUtils.e(bdLocation.getAddress().city);
+//                TextView tv1 = findViewById(R.id.tv_1);
+//                tv1.setText(bdLocation.describeContents());
             }
+        });
+        mLocationClient.registerNotify(new BDNotifyListener() {
         });
 
 
         LocationClientOption option = new LocationClientOption();
 
-        option.setLocationMode(LocationClientOption.LocationMode.Device_Sensors);
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
 //可选，设置定位模式，默认高精度
 //LocationMode.Hight_Accuracy：高精度；
 //LocationMode. Battery_Saving：低功耗；
@@ -71,14 +79,14 @@ public class MainActivity extends BaseHttpActivity {
         option.setLocationNotify(true);
 //可选，设置是否当GPS有效时按照1S/1次频率输出GPS结果，默认false
 
-        option.setIgnoreKillProcess(true);
+        option.setIgnoreKillProcess(false);
 //可选，定位SDK内部是一个service，并放到了独立进程。
 //设置是否在stop的时候杀死这个进程，默认（建议）不杀死，即setIgnoreKillProcess(true)
 
         option.SetIgnoreCacheException(false);
 //可选，设置是否收集Crash信息，默认收集，即参数为false
 
-        option.setWifiCacheTimeOut(5*60*1000);
+        option.setWifiCacheTimeOut(5 * 60 * 1000);
 //可选，V7.2版本新增能力
 //如果设置了该接口，首次启动定位时，会先判断当前Wi-Fi是否超出有效期，若超出有效期，会先重新扫描Wi-Fi，然后定位
 
@@ -100,6 +108,11 @@ public class MainActivity extends BaseHttpActivity {
         mLocationClient.restart();
     }
 
+//    private final LifecycleProvider<ActivityEvent> provider
+//            = NaviLifecycle.createActivityLifecycleProvider(this);
+
+    //    private final LifecycleProvider<Lifecycle.Event> provider
+//            = AndroidLifecycle.createLifecycleProvider(this);
     @Override
     protected void initData() {
         RetrofitClient.getInstance().createService(MyService.TestService.class, null, new TincherInterceptorCallback() {
@@ -124,8 +137,10 @@ public class MainActivity extends BaseHttpActivity {
             }
         })
                 .getTopMovie()
+
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<String>bindToLifecycle())
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -151,5 +166,8 @@ public class MainActivity extends BaseHttpActivity {
     }
 
 
+    @Override
+    protected void onNetworkStateChanged(boolean isNetworkAvailable, NetInfo netInfo) {
 
+    }
 }

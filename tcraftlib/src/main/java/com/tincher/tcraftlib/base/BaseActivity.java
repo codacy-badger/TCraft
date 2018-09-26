@@ -7,31 +7,26 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.tincher.tcraftlib.R;
-import com.tincher.tcraftlib.app.PermissionsChecker;
+import com.tincher.tcraftlib.utils.PermissionsChecker;
 import com.tincher.tcraftlib.config.PermissionConfig;
-import com.tincher.tcraftlib.network.networkstatus.NetInfo;
-import com.tincher.tcraftlib.network.networkstatus.NetworkStateListener;
-import com.tincher.tcraftlib.network.networkstatus.NetworkStateReceiver;
 import com.tincher.tcraftlib.utils.DensityHelper;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import java.util.Arrays;
 
-import static com.tincher.tcraftlib.app.PermissionsChecker.verifyPermissions;
+import static com.tincher.tcraftlib.utils.PermissionsChecker.verifyPermissions;
 
 /**
  * Created by dks on 2018/8/3.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends RxAppCompatActivity {
     private static final String TAG = "BaseActivity";
 
-
-    protected abstract int initLayout();
+    protected abstract int setLayoutRes();
 
     protected abstract void initView();
 
@@ -50,20 +45,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         DensityHelper.setCustomDensity(BaseActivity.this);
         super.onCreate(savedInstanceState);
-        setContentView(initLayout());
+        setContentView(setLayoutRes());
         initView();
-        initData();
-        initNetworkStateListener();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         if (isNeedCheckPermission) {
             String[] comm = PermissionConfig.permissions;
             String[] add  = addCheckPermissions();
@@ -77,60 +60,8 @@ public abstract class BaseActivity extends AppCompatActivity {
             PermissionsChecker.checkPermissions(this, PERMISSION_REQUEST_CODE, result);
         }
 
+        initData();
     }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        //移除网络状态监听
-        if (null != networkStateListener) {
-            NetworkStateReceiver.removeNetworkStateListener(networkStateListener);
-            NetworkStateReceiver.unRegisterNetworkStateReceiver(this);
-        }
-        super.onDestroy();
-    }
-
-
-    /**
-     * * ****************************************************************************************
-     * 网络状态监听器
-     **/
-    private NetworkStateListener networkStateListener;
-
-    /**
-     * 初始化网络状态监听器
-     */
-    private void initNetworkStateListener() {
-        NetworkStateReceiver.registerNetworkStateReceiver(this);
-        networkStateListener = new NetworkStateListener() {
-            @Override
-            public void onNetworkState(boolean isNetworkAvailable, NetInfo netInfo) {
-                BaseActivity.this.onNetworkState(isNetworkAvailable, netInfo);
-            }
-        };
-        //添加网络状态监听
-        NetworkStateReceiver.addNetworkStateListener(networkStateListener);
-    }
-
-    /**
-     * 网络状态
-     *
-     * @param isNetworkAvailable 网络是否可用
-     * @param netInfo            网络信息
-     */
-    protected void onNetworkState(boolean isNetworkAvailable, NetInfo netInfo) {
-        //Todo 网络状态
-        if (!isNetworkAvailable) {
-            Toast.makeText(this, "Network is not available", Toast.LENGTH_LONG).show();
-        }
-    }
-
 
     /**
      * ***************************************************************************************

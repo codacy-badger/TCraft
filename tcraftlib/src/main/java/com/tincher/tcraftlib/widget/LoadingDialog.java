@@ -62,23 +62,31 @@ public class LoadingDialog extends Dialog {
 
     // 加载成功
     public void succeed() {
+        if (!isShowing()){
+            show();
+        }
         if(pb_loading != null)
             pb_loading.setVisibility(View.GONE);
         if(iv_load_result != null){
             iv_load_result.setVisibility(View.VISIBLE);
             iv_load_result.setImageResource(R.mipmap.load_suc_icon);
         }
+
         tv_load.setText("加载成功");
     }
 
     // 加载失败
     public void failed() {
+        if (!isShowing()){
+            show();
+        }
         if(pb_loading != null)
             pb_loading.setVisibility(View.GONE);
         if(iv_load_result != null){
             iv_load_result.setVisibility(View.VISIBLE);
             iv_load_result.setImageResource(R.mipmap.load_fail_icon);
         }
+
         tv_load.setText("加载失败");
     }
 
