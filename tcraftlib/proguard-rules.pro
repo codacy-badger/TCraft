@@ -91,10 +91,6 @@
 -keepattributes *JavascriptInterface*
 
 # greenDao
-#-keep class org.greenrobot.** { *; }
-#-keepclassmembers class org.greenrobot.** { *; }
-#-dontwarn org.greenrobot.**
-
 -keepclassmembers class * extends org.greenrobot.greendao.AbstractDao {
 public static java.lang.String TABLENAME;
 }
@@ -105,5 +101,8 @@ public static java.lang.String TABLENAME;
 # If you do not use Rx:
 -dontwarn rx.**
 
+# RxLifecycle
+-keep class com.trello.rxlifecycle.** { *; }
+-keep interface com.trello.rxlifecycle.** { *; }
 
 -ignorewarnings

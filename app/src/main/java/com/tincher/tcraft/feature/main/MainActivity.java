@@ -1,7 +1,6 @@
 package com.tincher.tcraft.feature.main;
 
 import android.util.Log;
-import android.widget.TextView;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
@@ -10,7 +9,7 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.blankj.utilcode.util.LogUtils;
 import com.tincher.tcraft.R;
-import com.tincher.tcraft.data.MyService;
+import com.tincher.tcraft.data.MyApiService;
 import com.tincher.tcraftlib.base.BaseHttpActivity;
 import com.tincher.tcraftlib.network.RetrofitClient;
 import com.tincher.tcraftlib.network.TincherInterceptorCallback;
@@ -115,7 +114,7 @@ public class MainActivity extends BaseHttpActivity {
 //            = AndroidLifecycle.createLifecycleProvider(this);
     @Override
     protected void initData() {
-        RetrofitClient.getInstance().createService(MyService.TestService.class, null, new TincherInterceptorCallback() {
+        RetrofitClient.getInstance().createService(MyApiService.TestService.class, null, new TincherInterceptorCallback() {
             @Override
             public ResponseBody OnResponse(ResponseBody responseBody) {
                 byte[]       bytes;

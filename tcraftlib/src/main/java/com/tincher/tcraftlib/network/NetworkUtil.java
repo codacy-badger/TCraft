@@ -136,6 +136,7 @@ public class NetworkUtil {
         List<Interceptor> interceptors = new ArrayList<Interceptor>();
         interceptors.add(new DownloadInterceptor(listener));
 
+        //Todo 内存泄露
         DownloadRetrofitClient.getInstance().createService(DownloadServiceApi.class, null, interceptors)
                 .download(url)
                 .subscribeOn(Schedulers.io())

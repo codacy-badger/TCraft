@@ -11,13 +11,13 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
-
-import com.blankj.utilcode.util.LogUtils;
+import android.util.Log;
 
 import java.io.File;
 import java.util.List;
 
 /**
+ * 拍照 、 相册选取照片 等
  * Created by dks on 2018/9/12.
  */
 
@@ -47,7 +47,7 @@ public class ImageTools {
                         providerName = getFileProviderName(activity);
                     } catch (PackageManager.NameNotFoundException e) {
                         e.printStackTrace();
-                        LogUtils.e("ImageTools", e.getMessage());
+                        Log.e("ImageTools", e.getMessage());
                     }
                     uri = FileProvider.getUriForFile(activity, providerName, imageFile);
                     //加入uri权限 要不三星手机不能拍照
@@ -81,7 +81,6 @@ public class ImageTools {
         intent.setType("image/*");
         intent.putExtra("return-data", true);
         activity.startActivityForResult(intent, requestCode);
-
     }
 
 }

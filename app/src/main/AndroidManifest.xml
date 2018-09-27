@@ -33,6 +33,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity android:name=".feature.ClickEntranceActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+
         <activity android:name=".feature.main.MainActivity"
             android:theme="@style/Theme.Design.NoActionBar">
 <!--            <intent-filter>
@@ -42,12 +51,15 @@
             </intent-filter>-->
         </activity>
         <activity android:name=".feature.main.KMainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
+        <activity android:name=".feature.ScheduledTimerActivity" />
+        <activity android:name=".feature.FileDownloadActivity" />
+        <activity android:name=".feature.HttpRequestActivity" />
 
 
         <meta-data

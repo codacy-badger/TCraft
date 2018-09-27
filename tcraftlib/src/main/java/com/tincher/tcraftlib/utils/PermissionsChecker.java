@@ -1,9 +1,11 @@
 package com.tincher.tcraftlib.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,11 +54,10 @@ public class PermissionsChecker {
         return true;
     }
 
-/*    // 判断权限集合
-    public static boolean lacksPermissions(Context context,String... permissions) {
+    // 判断权限集合
+    public static boolean lacksPermissions(Context context, String... permissions) {
         for (String permission : permissions) {
             if (lacksPermission(context,permission)) {
-                LogUtil.d("check",permission);
                 return true;
             }
         }
@@ -67,5 +68,5 @@ public class PermissionsChecker {
     private static boolean lacksPermission(Context context,String permission) {
         return ContextCompat.checkSelfPermission(context, permission) ==
                 PackageManager.PERMISSION_DENIED;
-    }*/
+    }
 }

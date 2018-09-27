@@ -7,6 +7,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 简易定时器，非精确计时
  * Created by dks on 2018/3/9.
  */
 

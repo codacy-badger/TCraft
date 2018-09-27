@@ -14,6 +14,7 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 /**
+ * TincherInterceptor 不合理 ，-->请求结果拦截器
  * Created by dks on 2018/9/5.
  */
 

@@ -12,6 +12,7 @@ public class TCraft extends AppContext {
     @Override
     public void onCreate() {
         super.onCreate();
+        //屏幕适配
         DensityHelper.setCustomDensity(getmAppContext());
 //        if (LeakCanary.isInAnalyzerProcess(this)) {
 //            // This process is dedicated to LeakCanary for heap analysis.
