@@ -37,7 +37,7 @@ public class RetrofitClient {
     }
 
     private Retrofit mRetrofit;
-    private String mBaseUrl = TLibManager.baseUrl;
+    private String mBaseUrl = TLibManager.getBaseUrl();
 
     private String mLastToken = "";
     private TincherInterceptor tincherInterceptor;

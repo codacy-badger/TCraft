@@ -37,7 +37,7 @@ public class DownloadRetrofitClient {
     }
 
     private Retrofit mRetrofit;
-    private String mBaseUrl = TLibManager.baseUrl;
+    private String mBaseUrl = TLibManager.getBaseUrl();
 
 
     public <T> T createService(final Class<T> serviceClass, AccessToken accessToken, List<Interceptor> interceptors) {
