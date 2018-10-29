@@ -28,8 +28,13 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
     protected void onDestroy() {
         //移除网络状态监听
         if (null != networkStateListener) {
-            NetworkStateReceiver.removeNetworkStateListener(networkStateListener);
-            NetworkStateReceiver.unRegisterNetworkStateReceiver(this);
+            try {
+                NetworkStateReceiver.removeNetworkStateListener(networkStateListener);
+                NetworkStateReceiver.unRegisterNetworkStateReceiver(BaseHttpActivity.this);
+                networkStateListener = null;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         if (null != mainHandler) {
             mainHandler.removeCallbacksAndMessages(null);
@@ -94,7 +99,7 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
 
     protected LoadingDialog getLoadingDialog() {
         if (null == mLoadingDialog) {
-            mLoadingDialog = new LoadingDialog(this);
+            mLoadingDialog = new LoadingDialog(BaseHttpActivity.this);
             mLoadingDialog.setCanceledOnTouchOutside(false);
             mLoadingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
@@ -154,7 +159,7 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
      * 初始化网络状态监听器
      */
     private void initNetworkStateListener() {
-        NetworkStateReceiver.registerNetworkStateReceiver(this);
+        NetworkStateReceiver.registerNetworkStateReceiver(BaseHttpActivity.this);
         networkStateListener = new NetworkStateListener() {
             @Override
             public void onNetworkState(boolean isNetworkAvailable, NetInfo netInfo) {

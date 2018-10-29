@@ -1,6 +1,12 @@
 ## 使用
 1.导入
 - 将 tcraftlib文件夹复制到项目根目录
+```
+    build.gradle、config.gradle、.gitignore 也复制到根目录
+    app 的 build.gradle 参照demo复制
+    复制 gradle.properties 的内容，根目录建文件夹 keystore，并添加签名文件
+
+```
 - settings.gradle
 ```
 	include ':app', ':tcraftlib'
@@ -30,31 +36,15 @@
 		TLibManager.init(...)
     }
 ```
-
+- config.gradle 修改
+```
+    applicationId    : "com.tincher.tcraft",
+    applicationName  : "TCraft",
+    providerName     : "com.tincher.tcraftlib.fileProvider",
+```
 
 
 - 根据项目具体情况，更改 tcraftlib 中以下内容
-
-  - AndroidManifest.xml 中 FileProvider 的 authorities :"com.tincher.tcraftlib.fileProvider",以下两处需统一
-
-    ```java
-            <meta-data android:value="com.tincher.tcraftlib.fileProvider"
-                android:name="provider_name">
-            </meta-data>
-    ```
-
-    ```
-            <provider
-            	...
-                android:authorities="com.tincher.tcraftlib.fileProvider"
-                ...
-                >
-                <meta-data
-                    android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/provider_paths" />
-            </provider>
-    ```
-
   - 增加或更改 AndroidManifest.xml 中的基础权限,
 
     ```
