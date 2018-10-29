@@ -71,6 +71,15 @@ public class HttpRequestActivity extends BaseHttpActivity {
     }
 
     private void httpRequest() {
+//
+//        try {
+//           String  name  =  getFileProviderName(this);
+//            LogUtils.e(name);
+//
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//            LogUtils.e(e.getMessage());
+//        }
         RetrofitClient.getInstance().createService(MyApiService.xianduService.class)
                 .getXD()
                 .subscribeOn(Schedulers.io())

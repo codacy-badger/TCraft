@@ -29,7 +29,7 @@ public final class NetConfig {
     /**
      * 请求失败时是否自动重试
      */
-    public final static boolean RETRY_ON_CONNECTION_FAILURE = false;
+    public final static boolean RETRY_ON_CONNECTION_FAILURE = true;
 
     /**
      * CACHE 大小，单位：M

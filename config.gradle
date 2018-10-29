@@ -7,6 +7,7 @@ ext {
     android = [
             applicationId    : "com.tincher.tcraft",
             applicationName  : "TCraft",
+            providerName     : "com.tincher.tcraftlib.fileProvider",
 
             compileSdkVersion: 26,
             minSdkVersion    : 16,
@@ -62,7 +63,7 @@ ext {
             rxandroid            : "io.reactivex.rxjava2:rxandroid:${rxandroid}",
             rxlifecycle2         : "com.trello.rxlifecycle2:rxlifecycle:${rxlifecycle2}",
             rxlifecycleComponents: "com.trello.rxlifecycle2:rxlifecycle-components:${rxlifecycle2}",
-            retrofit2             : "com.squareup.retrofit2:retrofit:$retrofit2",
+            retrofit2            : "com.squareup.retrofit2:retrofit:$retrofit2",
             adapterRxjava2       : "com.squareup.retrofit2:adapter-rxjava2:$retrofit2",
             retrofitGson         : "com.squareup.retrofit2:converter-gson:$retrofit2",
 
@@ -92,7 +93,6 @@ ext {
 
             // 快速定位
             FastLocation          : "com.github.blisssayyid:FastLocation:${FastLocation}",
-
 
             // FlexBox layout
             flexbox               : "com.google.android:flexbox:$flexbox",

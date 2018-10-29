@@ -11,6 +11,6 @@ public class MyApp extends TCraft {
     @Override
     public void onCreate() {
         super.onCreate();
-        TLibManager.init(new TLibManager.TBuilder().baseUrl("dkaishu.com"));
+        TLibManager.init(new TLibManager.TBuilder().baseUrl("http://dkaishu.com/"));
     }
 }

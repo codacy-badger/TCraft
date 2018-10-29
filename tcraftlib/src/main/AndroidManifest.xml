@@ -10,13 +10,15 @@
 
     <application>
 
-        <meta-data android:value="com.tincher.tcraftlib.fileProvider"
-            android:name="provider_name">
+        <meta-data
+            android:name="provider_name"
+            android:value="${provider_name}"
+            >
         </meta-data>
-
+<!--        android:value="com.tincher.tcraftlib.fileProvider"-->
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.tincher.tcraftlib.fileProvider"
+            android:authorities="${provider_name}"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

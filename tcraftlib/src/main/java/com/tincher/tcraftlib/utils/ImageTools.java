@@ -68,7 +68,7 @@ public class ImageTools {
      * 与manifest文件中一致的唯一id
      * 用于解决provider冲突
      */
-    private static String getFileProviderName(@NonNull Activity activity) throws PackageManager.NameNotFoundException {
+    public static String getFileProviderName(@NonNull Activity activity) throws PackageManager.NameNotFoundException {
         ApplicationInfo appInfo = activity.getPackageManager().getApplicationInfo(activity.getPackageName(), PackageManager.GET_META_DATA);
 
         return appInfo.metaData.getString("provider_name");

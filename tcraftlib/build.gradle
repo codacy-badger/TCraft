@@ -33,7 +33,7 @@ dependencies {
 
 }
 
-
+def mProviderName = rootProject.ext.android.providerName
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -50,7 +50,14 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+
+            manifestPlaceholders = [provider_name: "${mProviderName}"]
+
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            manifestPlaceholders = [provider_name: "${mProviderName}"]
+
         }
     }
 
