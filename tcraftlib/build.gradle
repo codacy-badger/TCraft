@@ -8,6 +8,7 @@ dependencies {
     api rootProject.ext.supportDependencies.supportAppcompat
     api rootProject.ext.supportDependencies.supportV4
     api rootProject.ext.supportDependencies.supportDesign
+    api rootProject.ext.supportDependencies.supportCardview
     api rootProject.ext.supportDependencies.supportConstraintLayout
 
     debugApi rootProject.ext.baseDependencies.debugLeakcanary

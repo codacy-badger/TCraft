@@ -1,6 +1,7 @@
 package com.tincher.tcraftlib.app;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.Utils;
 import com.squareup.leakcanary.LeakCanary;
 import com.tincher.tcraftlib.BuildConfig;
 import com.tincher.tcraftlib.utils.DensityHelper;
@@ -23,6 +24,7 @@ public class TCraft extends AppContext {
 //        }
         LeakCanary.install(this);
 
+        Utils.init(this);
         LogUtils.getConfig()
                 .setLogSwitch(BuildConfig.DEBUG)
                 .setLog2FileSwitch(false)

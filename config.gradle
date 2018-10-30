@@ -54,6 +54,7 @@ ext {
             supportAppcompat       : "com.android.support:appcompat-v7:${support}",
             supportV4              : "com.android.support:support-v4:${support}",
             supportDesign          : "com.android.support:design:${support}",
+            supportCardview        : "com.android.support:cardview-v7:${support}",
             supportConstraintLayout: "com.android.support.constraint:constraint-layout:${constraint_layout}",
     ]
 

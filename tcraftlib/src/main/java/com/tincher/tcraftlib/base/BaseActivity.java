@@ -81,7 +81,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
                                            @NonNull String[] permissions, @NonNull int[] paramArrayOfInt) {
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (!verifyPermissions(paramArrayOfInt)) {
-                Log.d(TAG, String.valueOf(paramArrayOfInt));
                 showMissingPermissionDialog();
                 hasRequest++;
             } else {
