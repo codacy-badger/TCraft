@@ -60,6 +60,13 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
         getMainHandler().sendMessage(msg);
     }
 
+    public void showLoadingDialog(String tip) {
+        Message msg = new Message();
+        msg.what = SHOW_DIALOG;
+        getMainHandler().sendMessage(msg);
+        setLoadingText(tip);
+    }
+
     public void dismissLoadingDialog() {
         Message msg = new Message();
         msg.what = DISMISS_DIALOG;
@@ -126,7 +133,7 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
     public void handleMessage(Message msg) {
         switch (msg.what) {
             case SHOW_DIALOG: {
-                getLoadingDialog().text("加载中").showDialog();
+                getLoadingDialog().showDialog();
                 break;
             }
             case DISMISS_DIALOG: {
