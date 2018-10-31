@@ -60,6 +60,7 @@
         <activity android:name=".feature.ScheduledTimerActivity" />
         <activity android:name=".feature.FileDownloadActivity" />
         <activity android:name=".feature.HttpRequestActivity" />
+        <activity android:name=".feature.LocationActivity" />
 
 
         <meta-data
