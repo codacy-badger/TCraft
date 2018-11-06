@@ -18,6 +18,10 @@ dependencies {
     implementation project(':tcraftlib')
     implementation rootProject.ext.baseDependencies.kotlin
 
+
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+
 }
 
 def mApplicationName = rootProject.ext.android.applicationName

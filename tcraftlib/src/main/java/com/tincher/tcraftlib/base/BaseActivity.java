@@ -7,12 +7,11 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 
 import com.tincher.tcraftlib.R;
-import com.tincher.tcraftlib.utils.PermissionsChecker;
 import com.tincher.tcraftlib.config.PermissionConfig;
 import com.tincher.tcraftlib.utils.DensityHelper;
+import com.tincher.tcraftlib.utils.PermissionsChecker;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import java.util.Arrays;
@@ -79,6 +78,8 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions, @NonNull int[] paramArrayOfInt) {
+        super.onRequestPermissionsResult(requestCode, permissions, paramArrayOfInt);
+
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (!verifyPermissions(paramArrayOfInt)) {
                 showMissingPermissionDialog();
