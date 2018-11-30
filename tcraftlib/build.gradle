@@ -35,6 +35,8 @@ dependencies {
 }
 
 def mProviderName = rootProject.ext.android.providerName
+def mApplicationName = rootProject.ext.android.applicationName
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -45,6 +47,8 @@ android {
         versionName rootProject.ext.android.versionNameLib
 
         ndk { abiFilters "armeabi", "x86" }
+
+        buildConfigField "String", "mApplicationName", "\"${mApplicationName}\""
 
     }
 

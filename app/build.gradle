@@ -38,6 +38,7 @@ android {
         ndk { abiFilters "armeabi", "x86" }
 
 //        flavorDimensions "Areas"
+        buildConfigField "String", "mApplicationName", "\"${mApplicationName}\""
 
     }
 

@@ -31,6 +31,7 @@ public class ClickEntranceActivity extends BaseActivity {
         entrances.add(new Entrance("Http请求", HttpRequestActivity.class));
         entrances.add(new Entrance("获取坐标", LocationActivity.class));
         entrances.add(new Entrance("拍照选取", TakePhotoActivity.class));
+        entrances.add(new Entrance("通知提醒", NotificationActivity.class));
 
 
     }

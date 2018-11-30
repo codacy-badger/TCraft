@@ -5,7 +5,6 @@
     build.gradle、config.gradle、.gitignore 也复制到根目录
     app 的 build.gradle 参照demo复制
     复制 gradle.properties 的内容，根目录建文件夹 keystore，并添加签名文件
-
 ```
 - settings.gradle
 ```
@@ -44,7 +43,7 @@
 ```
 
 
-- 根据项目具体情况，更改 tcraftlib 中以下内容
+- 根据项目具体情况，更改 tcraftlib 中以下内容（以下仅是示例，具体项请在文件内查看）
   - 增加或更改 AndroidManifest.xml 中的基础权限,
 
     ```
@@ -76,7 +75,7 @@
 
 2.依赖库
 
-目前已集成以下库，无需再次配置，可直接使用
+目前已集成以下库，无需再次配置，可直接使用（具体项请文件内查看）
 
 ```
     api rootProject.ext.supportDependencies.supportAppcompat

@@ -59,6 +59,7 @@ public class RetrofitClient {
         return createService(serviceClass, accessToken, tincherInterceptorCallback, null);
     }
 
+    //Todo Callback 是糟糕的方式
 
     public <T> T createService(final Class<T> serviceClass, AccessToken accessToken, TincherInterceptorCallback tincherInterceptorCallback, List<Interceptor> interceptors) {
         String currentToken = accessToken == null ? "" : accessToken.getAccessToken();
