@@ -7,8 +7,6 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -17,10 +15,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.support.annotation.RequiresApi;
 import android.support.annotation.RequiresPermission;
 import android.support.v4.app.NotificationCompat;
-import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.tincher.tcraftlib.BuildConfig;
 import com.tincher.tcraftlib.app.AppContext;
@@ -61,6 +58,7 @@ public class NotificationHelper {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static synchronized void showNotification(Intent intent, int icon, String title, String content
             , long timeMillis, int id, NotificationChannel channel) {
         if (notificationManager == null) {

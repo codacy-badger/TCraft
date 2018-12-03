@@ -3,6 +3,7 @@ package com.tincher.tcraft.feature;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.os.Build;
@@ -14,6 +15,8 @@ import com.tincher.tcraft.BuildConfig;
 import com.tincher.tcraft.R;
 import com.tincher.tcraftlib.base.BaseActivity;
 import com.tincher.tcraftlib.utils.NotificationHelper;
+
+import static android.support.v4.app.NotificationCompat.VISIBILITY_SECRET;
 
 /**
  * 通知、震动、响铃
@@ -61,8 +64,19 @@ public class NotificationActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(NotificationActivity.this, NotificationActivity.class);
                 NotificationChannel channel = new NotificationChannel(BuildConfig.mApplicationName,
-                        BuildConfig.mApplicationName
-                        , NotificationManager.IMPORTANCE_LOW);
+                        BuildConfig.mApplicationName, NotificationManager.IMPORTANCE_LOW);
+                channel.canBypassDnd();//是否绕过请勿打扰模式
+                channel.enableLights(true);//闪光灯
+                channel.setLockscreenVisibility(VISIBILITY_SECRET);//锁屏显示通知
+                channel.setLightColor(Color.RED);//闪关灯的灯光颜色
+                channel.canShowBadge();//桌面launcher的消息角标
+                channel.enableVibration(true);//是否允许震动
+                channel.getAudioAttributes();//获取系统通知响铃声音的配置
+                channel.getGroup();//获取通知取到组
+                channel.setBypassDnd(true);//设置可绕过  请勿打扰模式
+                channel.setVibrationPattern(new long[]{100, 100, 200});//设置震动模式
+                channel.shouldShowLights();//是否会有灯光
+
                 NotificationHelper.showNotification(intent, R.mipmap.ic_launcher, "通知2", "通知2内容", System.currentTimeMillis(), 1201, channel);
             }
         });
