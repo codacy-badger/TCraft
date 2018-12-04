@@ -7,6 +7,7 @@ import com.tincher.tcraftlib.app.TLibManager;
 import com.tincher.tcraftlib.config.NetConfig;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -40,36 +41,24 @@ public class RetrofitClient {
     private String mBaseUrl = TLibManager.getBaseUrl();
 
     private String mLastToken = "";
-    private TincherInterceptor tincherInterceptor;
+
+    private boolean baseUrlChanged     = false;
+    private boolean interceptorsUpdate = false;
+
+    private final List<Interceptor> interceptors = new ArrayList<>();
 
 
     public <T> T createService(Class<T> serviceClass) {
         return createService(serviceClass, null);
     }
 
+
     public <T> T createService(final Class<T> serviceClass, AccessToken accessToken) {
-        return createService(serviceClass, accessToken, null, null);
-    }
-
-    public <T> T createService(final Class<T> serviceClass, AccessToken accessToken, List<Interceptor> interceptors) {
-        return createService(serviceClass, accessToken, null, interceptors);
-    }
-
-    public <T> T createService(final Class<T> serviceClass, AccessToken accessToken, TincherInterceptorCallback tincherInterceptorCallback) {
-        return createService(serviceClass, accessToken, tincherInterceptorCallback, null);
-    }
-
-    //Todo Callback 是糟糕的方式
-
-    public <T> T createService(final Class<T> serviceClass, AccessToken accessToken, TincherInterceptorCallback tincherInterceptorCallback, List<Interceptor> interceptors) {
         String currentToken = accessToken == null ? "" : accessToken.getAccessToken();
 
+        if (null == mRetrofit || !mLastToken.equals(currentToken) || baseUrlChanged || interceptorsUpdate) {
 
-        if (null == mRetrofit || !mLastToken.equals(currentToken)) {
             mLastToken = currentToken;
-
-            tincherInterceptor = new TincherInterceptor(mLastToken);
-            tincherInterceptor.setInterceptorCallback(tincherInterceptorCallback);
 
             OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
             //
@@ -90,7 +79,7 @@ public class RetrofitClient {
                 });*/
             }
 
-            if (interceptors != null && !interceptors.isEmpty()) {
+            if (!interceptors.isEmpty()) {
                 for (Interceptor interceptor : interceptors) {
                     okHttpClientBuilder.addInterceptor(interceptor);
                 }
@@ -108,7 +97,6 @@ public class RetrofitClient {
                             return chain.proceed(requestBuilder.build());
                         }
                     })
-                    .addInterceptor(tincherInterceptor)
                     .connectTimeout(NetConfig.CONNECT_TIMEOUT, TimeUnit.SECONDS)
                     .readTimeout(NetConfig.READ_TIMEOUT, TimeUnit.SECONDS)
                     .writeTimeout(NetConfig.WRITE_TIMEOUT, TimeUnit.SECONDS)
@@ -124,6 +112,9 @@ public class RetrofitClient {
                     .client(okHttpClientBuilder.build())
                     .build();
 
+            baseUrlChanged = false;
+            interceptorsUpdate = false;
+
         }
 
         return mRetrofit.create(serviceClass);
@@ -131,4 +122,12 @@ public class RetrofitClient {
     }
 
 
+    public void notifyBaseUrlchanged() {
+        baseUrlChanged = true;
+    }
+
+    public void addInterceptor(Interceptor interceptor) {
+        if (interceptor != null) interceptors.add(interceptor);
+        interceptorsUpdate = true;
+    }
 }

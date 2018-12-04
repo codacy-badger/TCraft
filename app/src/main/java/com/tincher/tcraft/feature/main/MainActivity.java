@@ -114,7 +114,8 @@ public class MainActivity extends BaseHttpActivity {
 //            = AndroidLifecycle.createLifecycleProvider(this);
     @Override
     protected void initData() {
-        RetrofitClient.getInstance().createService(MyApiService.TestService.class, null, new TincherInterceptorCallback() {
+        RetrofitClient.getInstance().createService(MyApiService.TestService.class
+/*                , null, new TincherInterceptorCallback() {
             @Override
             public ResponseBody OnResponse(ResponseBody responseBody) {
                 byte[]       bytes;
@@ -134,7 +135,8 @@ public class MainActivity extends BaseHttpActivity {
 
                 return newRb;
             }
-        })
+        }*/
+        )
                 .getTopMovie()
 
                 .subscribeOn(Schedulers.io())
