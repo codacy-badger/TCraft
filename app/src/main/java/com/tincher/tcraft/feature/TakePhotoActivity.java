@@ -15,7 +15,7 @@ import android.widget.ImageView;
 
 import com.tincher.tcraft.R;
 import com.tincher.tcraftlib.base.BaseActivity;
-import com.tincher.tcraftlib.utils.ImageTools;
+import com.tincher.tcraftlib.utils.PictureManager;
 
 import java.io.File;
 
@@ -54,15 +54,15 @@ public class TakePhotoActivity extends BaseActivity {
         bt_take_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ImageTools.takePhotoForResult(TakePhotoActivity.this, null, REQUEST_CODE_TAKE_PHOTO);//方式1
-                ImageTools.takePhotoForResult(TakePhotoActivity.this, new File(PATH_FILE_Temp, IMG_Name_Temp), REQUEST_CODE_TAKE_PHOTO);//方式2
+//                PictureManager.takePhotoForResult(TakePhotoActivity.this, null, REQUEST_CODE_TAKE_PHOTO);//方式1
+                PictureManager.takePhotoForResult(TakePhotoActivity.this, new File(PATH_FILE_Temp, IMG_Name_Temp), REQUEST_CODE_TAKE_PHOTO);//方式2
 
             }
         });
         bt_select_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageTools.selectPicFromAlbumForResult(TakePhotoActivity.this, REQUEST_CODE_SELECT_IMG);
+                PictureManager.selectPicFromAlbumForResult(TakePhotoActivity.this, REQUEST_CODE_SELECT_IMG);
 
             }
         });

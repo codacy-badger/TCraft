@@ -21,7 +21,7 @@ import java.util.List;
  * Created by dks on 2018/9/12.
  */
 
-public class ImageTools {
+public class PictureManager {
     public static void takePhotoForResult(@NonNull Activity activity, @Nullable File imageFile, int requestCode) {
         Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         takePhotoIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -47,7 +47,7 @@ public class ImageTools {
                         providerName = getFileProviderName(activity);
                     } catch (PackageManager.NameNotFoundException e) {
                         e.printStackTrace();
-                        Log.e("ImageTools", e.getMessage());
+                        Log.e("PictureManager", e.getMessage());
                     }
                     uri = FileProvider.getUriForFile(activity, providerName, imageFile);
                     //加入uri权限 要不三星手机不能拍照
@@ -70,15 +70,12 @@ public class ImageTools {
      */
     public static String getFileProviderName(@NonNull Activity activity) throws PackageManager.NameNotFoundException {
         ApplicationInfo appInfo = activity.getPackageManager().getApplicationInfo(activity.getPackageName(), PackageManager.GET_META_DATA);
-
         return appInfo.metaData.getString("provider_name");
-
-//        return "com.tincher.tcraftlib.fileProvider";
     }
 
     public static void selectPicFromAlbumForResult(@NonNull Activity activity, int requestCode) {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/*");
+        Intent intent = new Intent(Intent.ACTION_PICK, null);
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*");
         intent.putExtra("return-data", true);
         activity.startActivityForResult(intent, requestCode);
     }

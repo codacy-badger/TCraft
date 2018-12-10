@@ -34,10 +34,10 @@ class KMainActivity : BaseHttpActivity() {
 
     override fun initView() {
         tv_1.setOnClickListener {
-            //            ImageTools.takePhotoForResult(this
+            //            PictureManager.takePhotoForResult(this
 //                , File(Environment.getExternalStorageDirectory().path, "66.jpg"), 2)
 
-//            ImageTools.selectPicFromAlbumForResult(this, 1)
+//            PictureManager.selectPicFromAlbumForResult(this, 1)
             download()
 
 //            showLoadingFailed()
