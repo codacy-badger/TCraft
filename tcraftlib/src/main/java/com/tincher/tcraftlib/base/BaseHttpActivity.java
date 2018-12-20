@@ -52,19 +52,19 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
     private final static int LOAD_FAILED    = 0x004;
     private final static int SET_TEXT       = 0x005;
 
-    private boolean isSucceedFailedAutoDismiss = true;
+    private final    boolean isSucceedFailedAutoDismiss = true;
+    private volatile boolean allowedToShow              = false;
 
     public void showLoadingDialog() {
-        Message msg = new Message();
-        msg.what = SHOW_DIALOG;
-        getMainHandler().sendMessage(msg);
+        showLoadingDialog("加载中");
     }
 
     public void showLoadingDialog(String tip) {
         Message msg = new Message();
         msg.what = SHOW_DIALOG;
-        getMainHandler().sendMessage(msg);
-        setLoadingText(tip);
+        msg.obj = tip;
+        getMainHandler().sendMessageDelayed(msg, 800);//显示与隐藏之间间隔小于800ms不显示
+        allowedToShow = true;
     }
 
     public void dismissLoadingDialog() {
@@ -133,10 +133,14 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
     public void handleMessage(Message msg) {
         switch (msg.what) {
             case SHOW_DIALOG: {
-                getLoadingDialog().showDialog();
+                if (allowedToShow) {
+                    getLoadingDialog().showDialog();
+                    getLoadingDialog().text((String) msg.obj);
+                }
                 break;
             }
             case DISMISS_DIALOG: {
+                allowedToShow = false;
                 getLoadingDialog().dismissDialog();
                 break;
             }
