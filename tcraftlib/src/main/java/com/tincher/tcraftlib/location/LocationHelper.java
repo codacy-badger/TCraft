@@ -42,7 +42,7 @@ public class LocationHelper {
 
         if (locationManager != null) {
             List<String> providers = locationManager.getProviders(property.getCriteria(), true);
-            for (String provider : providers) {
+            for (String provider : providers) {// 无权限时，providers是空的
                 locationManager.requestLocationUpdates(provider, property.getmMinTime(), property.getmMinDistance(), listener);
             }
             mRegister.put(listener, locationManager);
@@ -107,4 +107,5 @@ public class LocationHelper {
         mRegister.remove(listener);
 
     }
+
 }

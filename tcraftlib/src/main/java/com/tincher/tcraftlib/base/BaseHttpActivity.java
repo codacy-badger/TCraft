@@ -55,6 +55,10 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
     private final    boolean isSucceedFailedAutoDismiss = true;
     private volatile boolean allowedToShow              = false;
 
+
+    /**
+     * 对于以下公共方法，无需处理线程问题，可直接在子线程调用。
+     */
     public void showLoadingDialog() {
         showLoadingDialog("加载中");
     }
@@ -118,6 +122,10 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
         return mLoadingDialog;
     }
 
+    /**
+     * 当Dialog dismiss时调动
+     * 可Override，以实现对Dialog dismiss的监听
+     */
     protected void onDialogDismiss() {
 
     }

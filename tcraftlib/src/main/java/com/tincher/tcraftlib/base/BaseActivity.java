@@ -14,8 +14,6 @@ import com.tincher.tcraftlib.utils.DensityHelper;
 import com.tincher.tcraftlib.utils.PermissionsChecker;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
-import java.util.Arrays;
-
 import static com.tincher.tcraftlib.utils.PermissionsChecker.verifyPermissions;
 
 /**
@@ -31,8 +29,17 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     protected abstract void initData();
 
+    /**
+     * 添加需要检测的权限
+     */
     protected String[] addCheckPermissions() {
         return null;
+    }
+
+    /**
+     * 当权限被用户手动允许时调用
+     */
+    protected void onAllPermissionsGrantedByUser() {
     }
 
     @Override
@@ -45,20 +52,15 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         DensityHelper.setCustomDensity(BaseActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(setLayoutRes());
-        initView();
         if (isNeedCheckPermission) {
-            String[] comm = PermissionConfig.permissions;
-            String[] add  = addCheckPermissions();
-            String[] result;
+            PermissionsChecker.checkPermissions(this, PERMISSION_REQUEST_CODE, PermissionConfig.permissions);
+            String[] add = addCheckPermissions();
             if (add != null) {
-                result = Arrays.copyOf(comm, comm.length + add.length);
-                System.arraycopy(add, 0, result, comm.length, add.length);
-            } else {
-                result = comm;
+                PermissionsChecker.checkPermissions(this, PERMISSION_REQUEST_CODE, add);
             }
-            PermissionsChecker.checkPermissions(this, PERMISSION_REQUEST_CODE, result);
         }
 
+        initView();
         initData();
     }
 
@@ -89,6 +91,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
                     permissionDialog.dismiss();
                 }
                 isNeedCheckPermission = false;
+                onAllPermissionsGrantedByUser();
             }
             if (hasRequest >= 3) {
                 showMissingPermissionDialog();

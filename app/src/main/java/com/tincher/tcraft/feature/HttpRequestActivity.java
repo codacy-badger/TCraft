@@ -15,6 +15,8 @@ import com.tincher.tcraftlib.network.networkstatus.NetInfo;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -23,9 +25,9 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class HttpRequestActivity extends BaseHttpActivity {
-    private static final String TAG = "HttpRequestActivity";
-    private TextView tv_show;
-    private Button   bt_start, bt_stop;
+    private static final String   TAG = "HttpRequestActivity";
+    private              TextView tv_show;
+    private              Button   bt_start, bt_stop;
 
     private Disposable disposable;
 
@@ -53,7 +55,6 @@ public class HttpRequestActivity extends BaseHttpActivity {
                 if (disposable != null) {
                     disposable.dispose();
                     Log.d(TAG, " disposable.dispose ");
-
                 }
             }
         });
@@ -70,6 +71,15 @@ public class HttpRequestActivity extends BaseHttpActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (disposable != null) {
+            disposable.dispose();
+            Log.d(TAG, " disposable.dispose ");
+        }
+    }
+
     private void httpRequest() {
 //
 //        try {
@@ -84,6 +94,18 @@ public class HttpRequestActivity extends BaseHttpActivity {
                 .getXD()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        showLoadingDialog();
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        dismissLoadingDialog();
+                    }
+                })
                 .compose(this.<Categories>bindToLifecycle())
                 .subscribe(new Observer<Categories>() {
                     @Override

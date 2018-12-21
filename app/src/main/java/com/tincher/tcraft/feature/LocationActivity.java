@@ -9,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,12 +24,24 @@ import com.tincher.tcraftlib.location.LocationUpdateProperty;
  * Created by dks on 2018/10/31.
  */
 
-public class LocationActivity extends BaseActivity {
-    private LocationListener listener;
+public class LocationActivity extends BaseActivity implements LocationListener {
+    private TextView tv_status;
+    private Button   bt_is_gps_open;
+    private TextView tv_location;
+
+    private LocationUpdateProperty property;
 
     @Override
     protected String[] addCheckPermissions() {
         return new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+    }
+
+    @SuppressLint("MissingPermission")
+    @Override
+    protected void onAllPermissionsGrantedByUser() {
+        // 首次获取权限时，需要重新注册，否则，因代码时序问题，无法定位
+        LocationHelper.register(property, this);
+
     }
 
     @Override
@@ -39,49 +52,9 @@ public class LocationActivity extends BaseActivity {
     @SuppressLint("MissingPermission")
     @Override
     protected void initView() {
-        final TextView tv_status      = findViewById(R.id.tv_status);
-        final Button   bt_is_gps_open = findViewById(R.id.bt_is_gps_open);
-        final TextView tv_location    = findViewById(R.id.tv_location);
-
-        listener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                tv_location.setText("Location: \n Longitude: " + location.getLongitude() + "\n Latitude: " + location.getLatitude());
-                LogUtils.e("Location: \n Longitude: " + location.getLongitude() + "\n Latitude: " + location.getLatitude());
-
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-                switch (status) {
-                    case LocationProvider.OUT_OF_SERVICE: {
-                        tv_status.setText("OUT_OF_SERVICE");
-                    }
-                    case LocationProvider.TEMPORARILY_UNAVAILABLE: {
-                        tv_status.setText("TEMPORARILY_UNAVAILABLE");
-
-                    }
-                    case LocationProvider.AVAILABLE: {
-                        tv_status.setText("AVAILABLE");
-
-                    }
-                }
-                LogUtils.e("provider: " + provider);
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-                LogUtils.e("onProviderEnabled: " + provider);
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-                LogUtils.e("onProviderDisabled: " + provider);
-
-            }
-        };
-//        LocationHelper.register(listener);
+        tv_status = findViewById(R.id.tv_status);
+        bt_is_gps_open = findViewById(R.id.bt_is_gps_open);
+        tv_location = findViewById(R.id.tv_location);
 
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_FINE);//设置定位精准度
@@ -95,12 +68,12 @@ public class LocationActivity extends BaseActivity {
         criteria.setHorizontalAccuracy(Criteria.NO_REQUIREMENT);//设置水平方向精确度
         criteria.setVerticalAccuracy(Criteria.NO_REQUIREMENT);//设置垂直方向精确度
 
-        LocationUpdateProperty property = new LocationUpdateProperty.Builder()
+        property = new LocationUpdateProperty.Builder()
                 .criteria(criteria)
                 .mMinDistance(50)
-                .mMinTime(2000).build();
+                .mMinTime(5000).build();
 
-        LocationHelper.register(property,listener);
+        LocationHelper.register(property, this);
 
         bt_is_gps_open.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +91,7 @@ public class LocationActivity extends BaseActivity {
 
     }
 
+
     @Override
     protected void initData() {
 
@@ -126,9 +100,43 @@ public class LocationActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (listener != null) {
-            LocationHelper.unRegister(listener);
-            listener = null;
+        LocationHelper.unRegister(this);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        tv_location.setText("Location: \n Longitude: " + location.getLongitude() + "\n Latitude: " + location.getLatitude());
+        LogUtils.e("Location: \n Longitude: " + location.getLongitude() + "\n Latitude: " + location.getLatitude());
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        switch (status) {
+            case LocationProvider.OUT_OF_SERVICE: {
+                tv_status.setText("OUT_OF_SERVICE");
+            }
+            case LocationProvider.TEMPORARILY_UNAVAILABLE: {
+                tv_status.setText("TEMPORARILY_UNAVAILABLE");
+
+            }
+            case LocationProvider.AVAILABLE: {
+                tv_status.setText("AVAILABLE");
+
+            }
         }
+        LogUtils.e("provider: " + provider);
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        LogUtils.e("onProviderEnabled: " + provider);
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        LogUtils.e("onProviderDisabled: " + provider);
+
     }
 }
