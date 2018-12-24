@@ -56,9 +56,6 @@ public class LoadingDialog extends Dialog {
         show();
     }
 
-    public void dismissDialog(){
-        dismiss();
-    }
 
     // 加载成功
     public void succeed() {

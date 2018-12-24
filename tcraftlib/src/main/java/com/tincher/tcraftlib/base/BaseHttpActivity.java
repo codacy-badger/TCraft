@@ -149,7 +149,7 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
             }
             case DISMISS_DIALOG: {
                 allowedToShow = false;
-                getLoadingDialog().dismissDialog();
+                getLoadingDialog().dismiss();
                 break;
             }
             case LOAD_SUCCEED: {
