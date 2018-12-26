@@ -61,6 +61,7 @@
         <activity android:name=".feature.NotificationActivity" />
         <activity android:name=".feature.CalendarActivity" />
         <activity android:name=".feature.LoadingDialogActivity" />
+        <activity android:name=".feature.TrimClickActivity" />
 
 
         <meta-data

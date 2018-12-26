@@ -36,6 +36,7 @@ public class ClickEntranceActivity extends BaseActivity {
         entrances.add(new Entrance("通知提醒", NotificationActivity.class));
         entrances.add(new Entrance("日历通知", CalendarActivity.class));
         entrances.add(new Entrance("LoadingDialog", LoadingDialogActivity.class));
+        entrances.add(new Entrance("防误点击", TrimClickActivity.class));
 
 
     }
