@@ -60,6 +60,7 @@
         <activity android:name=".feature.TakePhotoActivity" />
         <activity android:name=".feature.NotificationActivity" />
         <activity android:name=".feature.CalendarActivity" />
+        <activity android:name=".feature.LoadingDialogActivity" />
 
 
         <meta-data
