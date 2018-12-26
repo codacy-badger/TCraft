@@ -43,15 +43,22 @@ public class LoadingDialogActivity extends BaseHttpActivity {
             showLoadingFailed();
         });
 
+
+
         bt_set_text.setOnClickListener(v -> {
             showLoadingDialog();
-            //默认800毫秒后显示dialog，显示以后才能更改文字显示，如果想直接显示文字已改使用 showLoadingDialog("文字")
+            //默认800毫秒延迟显示dialog，显示以后才能更改文字显示
+            // 如果想直接显示文字已改使用 showLoadingDialog("文字")
             bt_set_text.postDelayed(() -> {
                 runOnUiThread(() -> {
                     setLoadingText("123456");
                 });
             },2000);
         });
+
+        //更改延迟显示时间
+        setDelayMillis(100);
+
     }
 
     @Override
@@ -60,7 +67,7 @@ public class LoadingDialogActivity extends BaseHttpActivity {
     }
 
     @Override
-    protected void onDialogDismiss() {
+    protected void onDialogDismissed() {
         ToastUtils.showShort("dismiss");
     }
 

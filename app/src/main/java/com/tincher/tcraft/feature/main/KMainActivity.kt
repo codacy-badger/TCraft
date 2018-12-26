@@ -138,7 +138,7 @@ class KMainActivity : BaseHttpActivity() {
         )
     }
 
-    override fun onDialogDismiss() {
+    override fun onDialogDismissed() {
 //        observer.cancel()
     }
 

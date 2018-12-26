@@ -52,9 +52,14 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
     private final static int LOAD_FAILED    = 0x004;
     private final static int SET_TEXT       = 0x005;
 
-    private final    boolean isSucceedFailedAutoDismiss = true;
-    private volatile boolean allowedToShow              = false;
+    private final boolean isSucceedFailedAutoDismiss = true;
 
+    private volatile boolean allowedToShow = false;
+    private volatile long    delayMillis   = 800;//默认延迟显示时间
+
+    public void setDelayMillis(long delayMillis) {
+        this.delayMillis = delayMillis;
+    }
 
     /**
      * 对于以下公共方法，无需处理线程问题，可直接在子线程调用。
@@ -67,7 +72,7 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
         Message msg = new Message();
         msg.what = SHOW_DIALOG;
         msg.obj = tip;
-        getMainHandler().sendMessageDelayed(msg, 800);//显示与隐藏之间间隔小于800ms不显示
+        getMainHandler().sendMessageDelayed(msg, delayMillis);//显示与隐藏之间间隔小于800ms不显示
         allowedToShow = true;
     }
 
@@ -115,7 +120,7 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
             mLoadingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
-                    onDialogDismiss();
+                    onDialogDismissed();
                 }
             });
         }
@@ -126,7 +131,7 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
      * 当Dialog dismiss时调动
      * 可Override，以实现对Dialog dismiss的监听
      */
-    protected void onDialogDismiss() {
+    protected void onDialogDismissed() {
 
     }
 
