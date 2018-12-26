@@ -36,7 +36,7 @@ ext {
 
     chuck = '1.1.0'
 
-    utilcode = '1.20.1'
+    utilcode = '1.22.7'
     quickAdapter = '2.9.38'
 
 //    easypermissions = '2.0.0'

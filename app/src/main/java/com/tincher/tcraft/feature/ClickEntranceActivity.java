@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.tincher.tcraft.R;
+import com.tincher.tcraft.feature.main.MainActivity;
 import com.tincher.tcraftlib.base.BaseActivity;
 import com.tincher.tcraftlib.widget.SelectorFactory;
 
@@ -26,12 +27,14 @@ public class ClickEntranceActivity extends BaseActivity {
 
 
     private void setData() {
+        entrances.add(new Entrance("MainActivity", MainActivity.class));
         entrances.add(new Entrance("定时任务", ScheduledTimerActivity.class));
         entrances.add(new Entrance("文件下载", FileDownloadActivity.class));
         entrances.add(new Entrance("Http请求", HttpRequestActivity.class));
         entrances.add(new Entrance("获取坐标", LocationActivity.class));
         entrances.add(new Entrance("拍照选取", TakePhotoActivity.class));
         entrances.add(new Entrance("通知提醒", NotificationActivity.class));
+        entrances.add(new Entrance("日历通知", CalendarActivity.class));
 
 
     }

@@ -2,6 +2,7 @@ package com.tincher.tcraft.feature.main;
 
 import android.util.Log;
 
+import com.baidu.location.Address;
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDNotifyListener;
@@ -12,17 +13,12 @@ import com.tincher.tcraft.R;
 import com.tincher.tcraft.data.MyApiService;
 import com.tincher.tcraftlib.base.BaseHttpActivity;
 import com.tincher.tcraftlib.network.RetrofitClient;
-import com.tincher.tcraftlib.network.TincherInterceptorCallback;
 import com.tincher.tcraftlib.network.networkstatus.NetInfo;
-
-import java.io.IOException;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.MediaType;
-import okhttp3.ResponseBody;
 
 public class MainActivity extends BaseHttpActivity {
     private static final String TAG = "MainActivity";
@@ -45,6 +41,9 @@ public class MainActivity extends BaseHttpActivity {
                 LogUtils.e(bdLocation.getAddress().city);
 //                TextView tv1 = findViewById(R.id.tv_1);
 //                tv1.setText(bdLocation.describeContents());
+               Address a =  bdLocation.getAddress();
+                LogUtils.e(a.address);
+
             }
         });
         mLocationClient.registerNotify(new BDNotifyListener() {
@@ -105,6 +104,7 @@ public class MainActivity extends BaseHttpActivity {
     protected void onResume() {
         super.onResume();
         mLocationClient.restart();
+//        EncryptUtils.class;
     }
 
 //    private final LifecycleProvider<ActivityEvent> provider

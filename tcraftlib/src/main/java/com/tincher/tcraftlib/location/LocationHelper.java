@@ -3,13 +3,19 @@ package com.tincher.tcraftlib.location;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.annotation.RequiresPermission;
 
+import com.tincher.tcraftlib.app.AppContext;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * 定位以获取坐标
@@ -18,7 +24,7 @@ import java.util.List;
 
 public class LocationHelper {
     @SuppressLint("StaticFieldLeak")
-    private static Context mContext;
+    private static Context                                    mContext;
     private static HashMap<LocationListener, LocationManager> mRegister = new HashMap<>();
 
     private static long  mMinTime     = LocationUpdateProperty.MIN_TIME_MILLISECOND_DEF;//最短间隔时间
@@ -107,5 +113,42 @@ public class LocationHelper {
         mRegister.remove(listener);
 
     }
+
+
+    public static Address getAddress(double latitude, double longitude) {
+        Geocoder geocoder = new Geocoder(AppContext.getmAppContext(), Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses.size() > 0) return addresses.get(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 根据经纬度获取所在国家
+     */
+    public static String getCountryName(double latitude, double longitude) {
+        Address address = getAddress(latitude, longitude);
+        return address == null ? "unknown" : address.getCountryName();
+    }
+
+    /**
+     * 根据经纬度获取所在地
+     */
+    public static String getLocality(double latitude, double longitude) {
+        Address address = getAddress(latitude, longitude);
+        return address == null ? "unknown" : address.getLocality();
+    }
+
+    /**
+     * 根据经纬度获取所在街道
+     */
+    public static String getStreet(double latitude, double longitude) {
+        Address address = getAddress(latitude, longitude);
+        return address == null ? "unknown" : address.getAddressLine(0);
+    }
+
 
 }
