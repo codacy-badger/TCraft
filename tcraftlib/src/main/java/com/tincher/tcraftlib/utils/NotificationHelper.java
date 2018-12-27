@@ -33,6 +33,8 @@ public class NotificationHelper {
 
     private static NotificationManager notificationManager;
 
+    private NotificationHelper() {
+    }
 
     /**
      * 通知栏显示一条通知

@@ -19,6 +19,9 @@ public class DensityHelper {
     private static float          appScaledDensity;
     private static DisplayMetrics appDisplayMetrics;
 
+    private DensityHelper() {
+    }
+
     public static void setCustomDensity(@NonNull final Application application) {
         appDisplayMetrics = application.getResources().getDisplayMetrics();
         if (appDensity == 0) {

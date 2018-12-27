@@ -1,6 +1,5 @@
 package com.tincher.tcraftlib.utils;
 
-import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -32,6 +31,8 @@ public class CalendarUtils {
     private final static String CALENDARS_ACCOUNT_TYPE = "com.android.tcraft";
     private final static String CALENDARS_DISPLAY_NAME = "tcraft";
 
+    private CalendarUtils() {
+    }
 
     /**
      * 检查是否已经添加了日历账户，如果没有添加先添加一个日历账户再次进行查询
@@ -167,7 +168,7 @@ public class CalendarUtils {
         }
         int rows;
         try {
-            ContentValues   values = new ContentValues();
+            ContentValues values = new ContentValues();
             values.put(CalendarContract.Events.TITLE, title);
             values.put(CalendarContract.Events.DTSTART, beginTimeMillis);
             values.put(CalendarContract.Events.DTEND, endTimeMillis);

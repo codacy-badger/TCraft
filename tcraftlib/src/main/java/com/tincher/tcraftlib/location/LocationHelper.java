@@ -30,6 +30,9 @@ public class LocationHelper {
     private static long  mMinTime     = LocationUpdateProperty.MIN_TIME_MILLISECOND_DEF;//最短间隔时间
     private static float mMinDistance = LocationUpdateProperty.MIN_DISTANCE_METER_DEF;//最短触发距离
 
+    private LocationHelper() {
+    }
+
     public static void init(Context context) {
         mContext = context.getApplicationContext();
     }

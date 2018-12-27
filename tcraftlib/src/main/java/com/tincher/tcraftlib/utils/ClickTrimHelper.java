@@ -8,6 +8,9 @@ public class ClickTrimHelper {
     private static final int MIN_DELAY_TIME= 1000;  // 两次点击最小间隔1000ms
     private static long lastClickTime;
 
+    private ClickTrimHelper() {
+    }
+
     public static boolean isFastClick() {
         boolean flag = true;
         long currentClickTime = System.currentTimeMillis();

@@ -22,6 +22,10 @@ import java.util.List;
  */
 
 public class PictureManager {
+
+    private PictureManager() {
+    }
+
     public static void takePhotoForResult(@NonNull Activity activity, @Nullable File imageFile, int requestCode) {
         Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         takePhotoIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

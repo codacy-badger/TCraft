@@ -15,6 +15,9 @@ import java.util.List;
  */
 public class PermissionsChecker {
 
+    private PermissionsChecker() {
+    }
+
     /**
      * 检测权限
      */
