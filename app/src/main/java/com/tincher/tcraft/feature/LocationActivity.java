@@ -1,14 +1,17 @@
 package com.tincher.tcraft.feature;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
+import android.support.annotation.IntRange;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -105,9 +108,15 @@ public class LocationActivity extends BaseActivity implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         tv_location.setText("Location: \n Longitude: " + location.getLongitude() + "\n Latitude: " + location.getLatitude());
-        LogUtils.e("Location: \n Longitude: " + location.getLongitude() + "\n Latitude: " + location.getLatitude());
-        String add = LocationHelper.getAddress(location.getLatitude(), location.getLongitude()).toString();
-        LogUtils.e(add);
+//        LogUtils.e("Location: \n Longitude: " + location.getLongitude() + "\n Latitude: " + location.getLatitude());
+//        String add = LocationHelper.getAddress(location.getLatitude(), location.getLongitude()).toString();
+//        LogUtils.e(add);
+
+
+//        Intent intent = new Intent();
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//        ObjectAnimator
+
 
     }
 
