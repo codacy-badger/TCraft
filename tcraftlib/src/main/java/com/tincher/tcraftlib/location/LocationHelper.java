@@ -119,7 +119,7 @@ public class LocationHelper {
 
 
     public static Address getAddress(double latitude, double longitude) {
-        Geocoder geocoder = new Geocoder(AppContext.getmAppContext(), Locale.getDefault());
+        Geocoder geocoder = new Geocoder(AppContext.getsAppContext(), Locale.getDefault());
         try {
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
             if (addresses.size() > 0) return addresses.get(0);

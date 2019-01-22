@@ -10,15 +10,15 @@ import android.app.Application;
 
 public class AppContext extends Application {
     @SuppressLint("StaticFieldLeak")
-    private static Application mAppContext;
+    private static Application sAppContext;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mAppContext = this;
+        sAppContext = this;
     }
 
-    public static Application getmAppContext() {
-        return mAppContext;
+    public static Application getsAppContext() {
+        return sAppContext;
     }
 }

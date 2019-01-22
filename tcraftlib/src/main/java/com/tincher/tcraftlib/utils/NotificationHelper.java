@@ -47,7 +47,7 @@ public class NotificationHelper {
     public static synchronized void showNotification(Intent intent, int icon, String title
             , String content, long timeMillis, int id, String channelId) {
         if (notificationManager == null) {
-            notificationManager = (NotificationManager) AppContext.getmAppContext()
+            notificationManager = (NotificationManager) AppContext.getsAppContext()
                     .getSystemService(Context.NOTIFICATION_SERVICE);
         }
 
@@ -64,7 +64,7 @@ public class NotificationHelper {
     public static synchronized void showNotification(Intent intent, int icon, String title, String content
             , long timeMillis, int id, NotificationChannel channel) {
         if (notificationManager == null) {
-            notificationManager = (NotificationManager) AppContext.getmAppContext()
+            notificationManager = (NotificationManager) AppContext.getsAppContext()
                     .getSystemService(Context.NOTIFICATION_SERVICE);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -86,8 +86,8 @@ public class NotificationHelper {
         }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(AppContext
-                .getmAppContext(), ci)
-                .setContentIntent(PendingIntent.getActivity(AppContext.getmAppContext()
+                .getsAppContext(), ci)
+                .setContentIntent(PendingIntent.getActivity(AppContext.getsAppContext()
                         , 0, intent, 0))
                 .setSmallIcon(icon)
                 .setChannelId(ci)
@@ -112,7 +112,7 @@ public class NotificationHelper {
      */
     @RequiresPermission(android.Manifest.permission.VIBRATE)
     public static void vibrate(long milliseconds) {
-        Vibrator vib = (Vibrator) AppContext.getmAppContext().getSystemService(Service.VIBRATOR_SERVICE);
+        Vibrator vib = (Vibrator) AppContext.getsAppContext().getSystemService(Service.VIBRATOR_SERVICE);
         if (vib != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 VibrationEffect vibrationEffect = VibrationEffect.createOneShot(milliseconds, VibrationEffect.DEFAULT_AMPLITUDE);
@@ -128,7 +128,7 @@ public class NotificationHelper {
      */
     @RequiresPermission(android.Manifest.permission.VIBRATE)
     public static void vibrate(long milliseconds, int amplitude) {
-        Vibrator vib = (Vibrator) AppContext.getmAppContext().getSystemService(Service.VIBRATOR_SERVICE);
+        Vibrator vib = (Vibrator) AppContext.getsAppContext().getSystemService(Service.VIBRATOR_SERVICE);
         if (vib != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 VibrationEffect vibrationEffect = VibrationEffect.createOneShot(milliseconds, amplitude);
@@ -142,7 +142,7 @@ public class NotificationHelper {
 
     @RequiresPermission(android.Manifest.permission.VIBRATE)
     public static void vibrate(long[] pattern, int repeat) {
-        Vibrator vib = (Vibrator) AppContext.getmAppContext().getSystemService(Service.VIBRATOR_SERVICE);
+        Vibrator vib = (Vibrator) AppContext.getsAppContext().getSystemService(Service.VIBRATOR_SERVICE);
         if (vib != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 VibrationEffect vibrationEffect = VibrationEffect.createWaveform(pattern, repeat);
@@ -155,7 +155,7 @@ public class NotificationHelper {
 
     @RequiresPermission(Manifest.permission.VIBRATE)
     public static void vibrate(long[] pattern, int repeat, AudioAttributes attributes) {
-        Vibrator vib = (Vibrator) AppContext.getmAppContext().getSystemService(Service.VIBRATOR_SERVICE);
+        Vibrator vib = (Vibrator) AppContext.getsAppContext().getSystemService(Service.VIBRATOR_SERVICE);
         if (vib != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 VibrationEffect vibrationEffect = VibrationEffect.createWaveform(pattern, repeat);
@@ -172,7 +172,7 @@ public class NotificationHelper {
 
     @RequiresPermission(Manifest.permission.VIBRATE)
     public static void vibrateCancel() {
-        Vibrator vib = (Vibrator) AppContext.getmAppContext().getSystemService(Service.VIBRATOR_SERVICE);
+        Vibrator vib = (Vibrator) AppContext.getsAppContext().getSystemService(Service.VIBRATOR_SERVICE);
         if (vib != null) {
             vib.cancel();
         }
@@ -193,7 +193,7 @@ public class NotificationHelper {
         }
         try {
             Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);//用于获取手机默认铃声的Uri
-            sMediaPlayer.setDataSource(AppContext.getmAppContext(), alert);
+            sMediaPlayer.setDataSource(AppContext.getsAppContext(), alert);
             sMediaPlayer.setAudioStreamType(AudioManager.STREAM_RING);//铃声流
             sMediaPlayer.setLooping(true);
             sMediaPlayer.prepare();

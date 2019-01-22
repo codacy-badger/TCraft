@@ -47,7 +47,7 @@ public class DownloadRetrofitClient {
         OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
 
         if (BuildConfig.DEBUG) {
-            okHttpClientBuilder.addInterceptor(new ChuckInterceptor(AppContext.getmAppContext()));
+            okHttpClientBuilder.addInterceptor(new ChuckInterceptor(AppContext.getsAppContext()));
         }
 
         if (interceptors != null && !interceptors.isEmpty()) {
@@ -72,7 +72,7 @@ public class DownloadRetrofitClient {
                 .readTimeout(NetConfig.READ_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(NetConfig.WRITE_TIMEOUT, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(NetConfig.RETRY_ON_CONNECTION_FAILURE);
-//                    .cache(new Cache(AppContext.getmAppContext().getCacheDir(), NetConfig.CACHE_SIZE * 1024 * 1024));
+//                    .cache(new Cache(AppContext.getsAppContext().getCacheDir(), NetConfig.CACHE_SIZE * 1024 * 1024));
 
         Retrofit.Builder builder = new Retrofit.Builder();
         builder
