@@ -40,7 +40,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".feature.ClickEntranceActivity">
+        <activity android:name=".feature.sample.ClickEntranceActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -53,15 +53,15 @@
             android:theme="@style/Theme.Design.NoActionBar"/>
 
         <activity android:name=".feature.main.KMainActivity" />
-        <activity android:name=".feature.ScheduledTimerActivity" />
-        <activity android:name=".feature.FileDownloadActivity" />
-        <activity android:name=".feature.HttpRequestActivity" />
-        <activity android:name=".feature.LocationActivity" />
-        <activity android:name=".feature.TakePhotoActivity" />
-        <activity android:name=".feature.NotificationActivity" />
-        <activity android:name=".feature.CalendarActivity" />
-        <activity android:name=".feature.LoadingDialogActivity" />
-        <activity android:name=".feature.TrimClickActivity" />
+        <activity android:name=".feature.sample.ScheduledTimerActivity" />
+        <activity android:name=".feature.sample.FileDownloadActivity" />
+        <activity android:name=".feature.sample.HttpRequestActivity" />
+        <activity android:name=".feature.sample.LocationActivity" />
+        <activity android:name=".feature.sample.TakePhotoActivity" />
+        <activity android:name=".feature.sample.NotificationActivity" />
+        <activity android:name=".feature.sample.CalendarActivity" />
+        <activity android:name=".feature.sample.LoadingDialogActivity" />
+        <activity android:name=".feature.sample.TrimClickActivity" />
 
 
         <meta-data
