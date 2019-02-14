@@ -62,6 +62,7 @@
         <activity android:name=".feature.sample.CalendarActivity" />
         <activity android:name=".feature.sample.LoadingDialogActivity" />
         <activity android:name=".feature.sample.TrimClickActivity" />
+        <activity android:name=".feature.view_custom.CustomViewTestActivity" />
 
 
         <meta-data
