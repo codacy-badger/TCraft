@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.tincher.tcraft.feature.main.MainActivity">
+    tools:context="com.dkaishu.tcraft.feature.main.MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"

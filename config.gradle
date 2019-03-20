@@ -5,9 +5,9 @@
  */
 ext {
     android = [
-            applicationId    : "com.tincher.tcraft",
+            applicationId    : "com.dkaishu.tcraft",
             applicationName  : "TCraft",
-            providerName     : "com.tincher.tcraftlib.fileProvider",
+            providerName     : "com.dkaishu.tcraftlib.fileProvider",
 
             compileSdkVersion: 26,
             minSdkVersion    : 16,

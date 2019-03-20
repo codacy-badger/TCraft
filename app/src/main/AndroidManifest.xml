@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.tincher.tcraft">
+    package="com.dkaishu.tcraft">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -31,7 +31,7 @@
 
 
     <application
-        android:name=".app.MyApp"
+        android:name="com.dkaishu.tcraft.app.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -40,7 +40,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".feature.sample.ClickEntranceActivity">
+        <activity android:name="com.dkaishu.tcraft.feature.sample.ClickEntranceActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,20 +49,20 @@
         </activity>
 
         <activity
-            android:name=".feature.main.MainActivity"
+            android:name="com.dkaishu.tcraft.feature.main.MainActivity"
             android:theme="@style/Theme.Design.NoActionBar"/>
 
-        <activity android:name=".feature.main.KMainActivity" />
-        <activity android:name=".feature.sample.ScheduledTimerActivity" />
-        <activity android:name=".feature.sample.FileDownloadUploadActivity" />
-        <activity android:name=".feature.sample.HttpRequestActivity" />
-        <activity android:name=".feature.sample.LocationActivity" />
-        <activity android:name=".feature.sample.TakePhotoActivity" />
-        <activity android:name=".feature.sample.NotificationActivity" />
-        <activity android:name=".feature.sample.CalendarActivity" />
-        <activity android:name=".feature.sample.LoadingDialogActivity" />
-        <activity android:name=".feature.sample.TrimClickActivity" />
-        <activity android:name=".feature.view_custom.CustomViewTestActivity" />
+        <activity android:name="com.dkaishu.tcraft.feature.main.KMainActivity" />
+        <activity android:name="com.dkaishu.tcraft.feature.sample.ScheduledTimerActivity" />
+        <activity android:name="com.dkaishu.tcraft.feature.sample.FileDownloadUploadActivity" />
+        <activity android:name="com.dkaishu.tcraft.feature.sample.HttpRequestActivity" />
+        <activity android:name="com.dkaishu.tcraft.feature.sample.LocationActivity" />
+        <activity android:name="com.dkaishu.tcraft.feature.sample.TakePhotoActivity" />
+        <activity android:name="com.dkaishu.tcraft.feature.sample.NotificationActivity" />
+        <activity android:name="com.dkaishu.tcraft.feature.sample.CalendarActivity" />
+        <activity android:name="com.dkaishu.tcraft.feature.sample.LoadingDialogActivity" />
+        <activity android:name="com.dkaishu.tcraft.feature.sample.TrimClickActivity" />
+        <activity android:name="com.dkaishu.tcraft.feature.view_custom.CustomViewTestActivity" />
 
 
         <meta-data
