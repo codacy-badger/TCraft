@@ -122,12 +122,14 @@ public class RetrofitClient {
     }
 
 
-    public void notifyBaseUrlchanged() {
+    public RetrofitClient notifyBaseUrlchanged() {
         baseUrlChanged = true;
+        return getInstance();
     }
 
-    public void addInterceptor(Interceptor interceptor) {
+    public RetrofitClient addInterceptor(Interceptor interceptor) {
         if (interceptor != null) interceptors.add(interceptor);
         interceptorsUpdate = true;
+        return getInstance();
     }
 }

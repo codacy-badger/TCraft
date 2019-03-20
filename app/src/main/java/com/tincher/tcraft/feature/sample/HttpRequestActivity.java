@@ -7,16 +7,14 @@ import android.widget.TextView;
 
 import com.tincher.tcraft.R;
 import com.tincher.tcraft.data.MyApiService;
+import com.tincher.tcraft.data.base.BaseHttpObserver;
 import com.tincher.tcraft.data.model.Categories;
 import com.tincher.tcraftlib.base.BaseHttpActivity;
 import com.tincher.tcraftlib.network.RetrofitClient;
 import com.tincher.tcraftlib.network.networkstatus.NetInfo;
 
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -26,11 +24,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class HttpRequestActivity extends BaseHttpActivity {
     private static final String   TAG = "HttpRequestActivity";
-    private              TextView tv_show;
-    private              Button   bt_start, bt_stop;
-
-    private Disposable disposable;
-
 
     @Override
     protected int setLayoutRes() {
@@ -39,96 +32,27 @@ public class HttpRequestActivity extends BaseHttpActivity {
 
     @Override
     protected void initView() {
-        tv_show = findViewById(R.id.tv_show);
-        bt_start = findViewById(R.id.bt_start);
-        bt_stop = findViewById(R.id.bt_stop);
-        bt_start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                httpRequest();
-            }
-        });
-
-        bt_stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (disposable != null) {
-                    disposable.dispose();
-                    Log.d(TAG, " disposable.dispose ");
-                }
-            }
-        });
+        findViewById(R.id.bt_start).setOnClickListener(v -> httpRequest());
     }
 
     @Override
     protected void initData() {
-
-
-    }
-
-    @Override
-    protected void onNetworkStateChanged(boolean isNetworkAvailable, NetInfo netInfo) {
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        if (disposable != null) {
-            disposable.dispose();
-            Log.d(TAG, " disposable.dispose ");
-        }
     }
 
     private void httpRequest() {
-//
-//        try {
-//           String  name  =  getFileProviderName(this);
-//            LogUtils.e(name);
-//
-//        } catch (PackageManager.NameNotFoundException e) {
-//            e.printStackTrace();
-//            LogUtils.e(e.getMessage());
-//        }
-        RetrofitClient.getInstance().createService(MyApiService.xianduService.class)
+        RetrofitClient.getInstance().createService(MyApiService.class)
                 .getXD()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>() {
+                .compose(this.bindToLifecycle())
+                .doOnSubscribe(disposable -> showLoadingDialog())
+                .doFinally(this::dismissLoadingDialog)
+                .subscribe(new BaseHttpObserver<Categories>() {
                     @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        showLoadingDialog();
+                    public void onSuccess(Categories categories) {
+                        Log.d(TAG, "onSuccess: "+String.valueOf(categories.getResults().size()));
                     }
-                })
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        dismissLoadingDialog();
-                    }
-                })
-                .compose(this.<Categories>bindToLifecycle())
-                .subscribe(new Observer<Categories>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        Log.d(TAG, "onSubscribe: ");
-                        disposable = d;
-                    }
-
-                    @Override
-                    public void onNext(Categories categories) {
-                        Log.d(TAG, "onNext: ");
-                        tv_show.setText(String.valueOf(categories.getResults().size()));
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "onError: " + e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.d(TAG, "onComplete: Over!");
-                    }
+                    //可override其他方法
                 });
     }
 }

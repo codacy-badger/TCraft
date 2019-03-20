@@ -57,7 +57,7 @@ public class DownloadResponseBody extends ResponseBody {
                 totalBytesRead += bytesRead != -1 ? bytesRead : 0;
                 if (null != downloadListener) {
                     if (bytesRead != -1) {
-                        downloadListener.onProgress((totalBytesRead * 100f / responseBody.contentLength()),responseBody.contentLength());
+                        downloadListener.onProgress((int) (totalBytesRead * 100f / responseBody.contentLength()),responseBody.contentLength());
                     }
                 }
                 return bytesRead;

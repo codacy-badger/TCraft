@@ -46,26 +46,26 @@ android {
         release {
 
             // v1、v2 全选即可
-            v1SigningEnabled true
-            v2SigningEnabled true
+//            v1SigningEnabled true
+//            v2SigningEnabled true
 
             // gradle.properties 中统一配置签名文件和密码
-            try {
-                //签名证书文件
-                storeFile file(STORE_FILE)
-
-                // 签名证书密码
-                storePassword STORE_PASSWORD
-
-                // 别名
-                keyAlias KEY_ALIAS
-
-                // 别名密码
-                keyPassword KEY_PASSWORD
-            }
-            catch (ex) {
-                throw new InvalidUserDataException("请在 gradle.properties 配置签名文件\n" + ex.message)
-            }
+//            try {
+//                //签名证书文件
+//                storeFile file(STORE_FILE)
+//
+//                // 签名证书密码
+//                storePassword STORE_PASSWORD
+//
+//                // 别名
+//                keyAlias KEY_ALIAS
+//
+//                // 别名密码
+//                keyPassword KEY_PASSWORD
+//            }
+//            catch (ex) {
+//                throw new InvalidUserDataException("请在 gradle.properties 配置签名文件\n" + ex.message)
+//            }
         }
 
         debug {

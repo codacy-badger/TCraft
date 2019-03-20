@@ -114,7 +114,7 @@ public class MainActivity extends BaseHttpActivity {
 //            = AndroidLifecycle.createLifecycleProvider(this);
     @Override
     protected void initData() {
-        RetrofitClient.getInstance().createService(MyApiService.TestService.class
+        RetrofitClient.getInstance().createService(MyApiService.class
 /*                , null, new TincherInterceptorCallback() {
             @Override
             public ResponseBody OnResponse(ResponseBody responseBody) {

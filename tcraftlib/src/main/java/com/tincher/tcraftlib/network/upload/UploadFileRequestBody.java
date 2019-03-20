@@ -13,18 +13,17 @@ import okio.Sink;
 
 /**
  *
- * Todo 文件上传编写和测试
  * Created by dks on 2018/9/13.
  */
 
 public class UploadFileRequestBody<T> extends RequestBody {
-    private File                  file;
-    private FileUploadListener<T> fileUploadListener;
+    private File               file;
+    private FileUploadListener fileUploadListener;
 
     private RequestBody mRequestBody;
 
 
-    public UploadFileRequestBody(File file, FileUploadListener<T> fileUploadListener) {
+    public UploadFileRequestBody(File file, FileUploadListener fileUploadListener) {
         this.file = file;
         this.fileUploadListener = fileUploadListener;
         mRequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file); //multipart/form-data  || application/octet-stream
@@ -51,7 +50,7 @@ public class UploadFileRequestBody<T> extends RequestBody {
         bufferedSink.flush();
     }
 
-     private class CountingSink extends ForwardingSink {
+    private class CountingSink extends ForwardingSink {
         private long bytesWritten = 0;
 
         public CountingSink(Sink delegate) {
@@ -64,6 +63,5 @@ public class UploadFileRequestBody<T> extends RequestBody {
             bytesWritten += byteCount;
             fileUploadListener.onProgress(bytesWritten, contentLength());
         }
-
     }
 }

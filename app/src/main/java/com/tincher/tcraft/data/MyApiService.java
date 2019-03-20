@@ -1,36 +1,50 @@
 package com.tincher.tcraft.data;
 
+import com.tincher.tcraft.data.base.BaseResponse;
 import com.tincher.tcraft.data.model.Categories;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.QueryMap;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 /**
  * Created by dks on 2018/9/6.
  */
 
-public class MyApiService {
+public interface MyApiService {
 
 
-    public interface GitHubService {
-        @GET("users/{user}/repos")
-        Call<List<String>> listRepos(@Path("user") String user);
+    @GET("users/{user}/repos")
+    Call<List<String>> listRepos(@Path("user") String user);
 
-    }
 
-    public interface TestService {
-        @GET("http://dkaishu.com")
-        Observable<String> getTopMovie();
+    @GET("http://dkaishu.com")
+    Observable<String> getTopMovie();
 
-    }
 
-    public interface xianduService {
-        @GET("https://gank.io/api/xiandu/categories")
-        Observable<Categories> getXD();
+    @GET("https://gank.io/api/xiandu/categories")
+    Observable<Categories> getXD();
 
-    }
+
+
+    @Streaming
+    @GET
+    Observable<ResponseBody> download(@Url String url);
+
+    @Multipart
+    @POST
+    Observable<BaseResponse> upload(@Url String url, @Part MultipartBody.Part file, @QueryMap Map<String, String> params);
+
 }

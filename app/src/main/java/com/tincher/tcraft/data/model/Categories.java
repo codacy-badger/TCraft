@@ -1,12 +1,14 @@
 package com.tincher.tcraft.data.model;
 
+import com.tincher.tcraft.data.base.BaseResponse;
+
 import java.util.List;
 
 /**
  * Created by dks on 2018/9/27.
  */
 
-public class Categories {
+public class Categories extends BaseResponse {
 
     private boolean      error;
     private List<Result> results;

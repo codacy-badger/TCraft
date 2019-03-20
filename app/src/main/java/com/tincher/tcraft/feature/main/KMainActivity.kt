@@ -12,13 +12,10 @@ import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.LogUtils
 import com.tincher.tcraft.R
 import com.tincher.tcraftlib.base.BaseHttpActivity
-import com.tincher.tcraftlib.network.NetworkUtil
-import com.tincher.tcraftlib.network.download.DownloadListener
 import com.tincher.tcraftlib.network.download.FileDownLoadObserver
 import com.tincher.tcraftlib.network.networkstatus.NetInfo
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
-import java.text.DecimalFormat
 
 
 /**
@@ -116,26 +113,26 @@ class KMainActivity : BaseHttpActivity() {
     private fun download() {
         showLoadingDialog()
 
-        NetworkUtil.download(downloadUrl, Environment.getExternalStorageDirectory().path, "66.apk"
-
-            , object : DownloadListener {
-
-                override fun onProgress(progress: Float, total: Long) {
-
-                    val df = DecimalFormat("0.00")
-                    setLoadingText(df.format(progress) + " %")
-                    runOnUiThread(Runnable {
-                        tv_1.text = df.format(progress) + " %"
-
-                    })
-
-                }
-            }
-
-            , observer
-
-
-        )
+//        NetworkUtil.download(downloadUrl, Environment.getExternalStorageDirectory().path, "66.apk"
+//
+//            , object : DownloadListener {
+//
+//                override fun onProgress(progress: Float, total: Long) {
+//
+//                    val df = DecimalFormat("0.00")
+//                    setLoadingText(df.format(progress) + " %")
+//                    runOnUiThread(Runnable {
+//                        tv_1.text = df.format(progress) + " %"
+//
+//                    })
+//
+//                }
+//            }
+//
+//            , observer
+//
+//
+//        )
     }
 
     override fun onDialogDismissed() {

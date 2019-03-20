@@ -8,7 +8,6 @@ import com.tincher.tcraftlib.config.NetConfig;
 import com.tincher.tcraftlib.network.AccessToken;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -17,30 +16,24 @@ import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by dks on 2018/8/3.
  */
 
 public class DownloadRetrofitClient {
-    private static DownloadRetrofitClient INSTANCE = null;
 
     private DownloadRetrofitClient() {
     }
 
-    public static DownloadRetrofitClient getInstance() {
-        if (null == INSTANCE) {
-            INSTANCE = new DownloadRetrofitClient();
-        }
-        return INSTANCE;
+    public static DownloadRetrofitClient newInstance() {
+        return new DownloadRetrofitClient();
     }
 
-    private Retrofit mRetrofit;
     private String mBaseUrl = TLibManager.getBaseUrl();
 
 
-    public <T> T createService(final Class<T> serviceClass, AccessToken accessToken, List<Interceptor> interceptors) {
+    public <T> T createService(final Class<T> serviceClass, AccessToken accessToken, DownloadListener downloadListener) {
         final String mLastToken = accessToken == null ? "" : accessToken.getAccessToken();
 
 
@@ -50,10 +43,8 @@ public class DownloadRetrofitClient {
             okHttpClientBuilder.addInterceptor(new ChuckInterceptor(AppContext.getsAppContext()));
         }
 
-        if (interceptors != null && !interceptors.isEmpty()) {
-            for (Interceptor interceptor : interceptors) {
-                okHttpClientBuilder.addInterceptor(interceptor);
-            }
+        if (downloadListener != null) {
+            okHttpClientBuilder.addInterceptor(new DownloadInterceptor(downloadListener));
         }
 
         okHttpClientBuilder
@@ -64,7 +55,6 @@ public class DownloadRetrofitClient {
                         Request.Builder requestBuilder = original.newBuilder();
                         requestBuilder.header("token", mLastToken)
                                 .method(original.method(), original.body());
-
                         return chain.proceed(requestBuilder.build());
                     }
                 })
@@ -77,13 +67,11 @@ public class DownloadRetrofitClient {
         Retrofit.Builder builder = new Retrofit.Builder();
         builder
                 .baseUrl(mBaseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
-        mRetrofit = builder
-                .client(okHttpClientBuilder.build())
-                .build();
 
-        return mRetrofit.create(serviceClass);
+        return builder.client(okHttpClientBuilder.build()).build()
+                .create(serviceClass);
 
     }
 

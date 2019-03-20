@@ -30,7 +30,7 @@ public class ClickEntranceActivity extends BaseActivity {
     private void setData() {
         entrances.add(new Entrance("MainActivity", MainActivity.class));
         entrances.add(new Entrance("定时任务", ScheduledTimerActivity.class));
-        entrances.add(new Entrance("文件下载", FileDownloadActivity.class));
+        entrances.add(new Entrance("文件下载", FileDownloadUploadActivity.class));
         entrances.add(new Entrance("Http请求", HttpRequestActivity.class));
         entrances.add(new Entrance("获取坐标", LocationActivity.class));
         entrances.add(new Entrance("拍照选取", TakePhotoActivity.class));

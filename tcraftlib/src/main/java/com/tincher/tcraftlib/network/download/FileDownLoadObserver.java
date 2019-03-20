@@ -16,7 +16,6 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.disposables.DisposableHelper;
 import io.reactivex.internal.util.EndConsumerHelper;
-import io.reactivex.observers.DefaultObserver;
 import okhttp3.ResponseBody;
 
 /**
@@ -25,10 +24,10 @@ import okhttp3.ResponseBody;
 
 public abstract class FileDownLoadObserver<T> implements Observer<T> {
     final AtomicReference<Disposable> s = new AtomicReference<>();
+
     @Override
     public void onSubscribe(@NonNull Disposable s) {
-        if (EndConsumerHelper.setOnce(this.s, s, getClass())) {
-        }
+        EndConsumerHelper.setOnce(this.s, s, getClass());
     }
 
     /**
@@ -42,13 +41,11 @@ public abstract class FileDownLoadObserver<T> implements Observer<T> {
     @Override
     public void onNext(T t) {
         onDownLoadSuccess(t);
-
     }
 
     @Override
     public void onError(Throwable e) {
         onDownLoadFail(e);
-
     }
 
     //可以重写，具体可由子类实现
@@ -64,7 +61,8 @@ public abstract class FileDownLoadObserver<T> implements Observer<T> {
     public abstract void onDownLoadFail(Throwable throwable);
 
     //进度监听
-    public abstract void onSaveProgress(int progress, Long total);
+    public void onSaveProgress(int progress, Long total) {
+    }
 
 
     public File saveFile(ResponseBody responseBody, String destFileDir, String destFileName) {
@@ -99,13 +97,10 @@ public abstract class FileDownLoadObserver<T> implements Observer<T> {
             return FileUtils.getFileByPath(downloadFilePath);
         } catch (IOException e) {
             e.printStackTrace();
-//            Log.e("saveFile", e.getMessage());
             return null;
         } finally {
             CloseUtils.closeIO(is, os);
         }
-
-
     }
 
 }

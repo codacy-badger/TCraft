@@ -17,7 +17,6 @@ import com.tincher.tcraftlib.widget.LoadingDialog;
 
 public abstract class BaseHttpActivity extends BaseActivity implements BaseHandler.CallBack {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -195,12 +194,13 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
     }
 
     /**
-     * 网络状态
+     * 网络状态 子类可选择重写
      *
      * @param isNetworkAvailable 网络是否可用
      * @param netInfo            网络信息
      */
-    protected abstract void onNetworkStateChanged(boolean isNetworkAvailable, NetInfo netInfo);
+    protected void onNetworkStateChanged(boolean isNetworkAvailable, NetInfo netInfo) {
+    }
 
 
 }
