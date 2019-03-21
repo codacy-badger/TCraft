@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_times"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:gravity="center"
+        android:text="0"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/bt_no_trim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="OnClick"
-        />
+        android:text="OnClick" />
+
     <Button
         android:id="@+id/bt_trim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="OnTrimClick"
-        />
-
-
-
+        android:text="OnTrimClick" />
 
 
 </LinearLayout>

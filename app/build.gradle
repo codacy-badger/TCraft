@@ -127,11 +127,11 @@ android {
 
 
     productFlavors {
-//        HeKou10 {
+//        home {
 //            flavorDimensions "Areas"
 //            buildConfigField "String", "FLAVOR_NAME", "\"HeKou10\""
 //
-//            applicationId "com.tincher.hkperformance.HeKou10"
+//            applicationId "com.dkaishu.my.home"
 //            versionCode rootProject.ext.android.versionCode_HeKou
 //            versionName rootProject.ext.android.versionName_HeKou
 //

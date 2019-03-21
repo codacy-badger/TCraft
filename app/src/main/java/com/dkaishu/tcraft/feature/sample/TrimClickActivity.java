@@ -1,20 +1,18 @@
 package com.dkaishu.tcraft.feature.sample;
 
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.dkaishu.tcraft.R;
 import com.dkaishu.tcraftlib.base.BaseActivity;
-import com.dkaishu.tcraftlib.utils.ClickTrimHelper;
 import com.dkaishu.tcraftlib.view.OnTrimClickListener;
 
 /**
  * Created by dks on 2018/12/26.
  */
 public class TrimClickActivity extends BaseActivity {
-
-    private Button bt_no_trim, bt_trim;
+    private TextView tvTimes;
+    private  int      time;
 
     @Override
     protected int setLayoutRes() {
@@ -23,21 +21,20 @@ public class TrimClickActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        bt_trim = findViewById(R.id.bt_trim);
-        bt_no_trim = findViewById(R.id.bt_no_trim);
-
-        bt_no_trim.setOnClickListener(new View.OnClickListener() {
+        tvTimes = findViewById(R.id.tv_times);
+        findViewById(R.id.bt_no_trim).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ClickTrimHelper.isFastClick())
-                    ToastUtils.showShort("太快了");
+                time += 1;
+                update();
             }
         });
 
-        bt_trim.setOnClickListener(new OnTrimClickListener() {
+        findViewById(R.id.bt_trim).setOnClickListener(new OnTrimClickListener() {
             @Override
             public void onTrimClick() {
-                ToastUtils.showShort("奏效了");
+                time+=1;
+                update();
             }
         });
 
@@ -45,6 +42,9 @@ public class TrimClickActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+    }
 
+    private void update() {
+        tvTimes.setText("" + time);
     }
 }

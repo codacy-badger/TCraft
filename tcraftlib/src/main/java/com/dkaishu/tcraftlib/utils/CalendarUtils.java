@@ -53,9 +53,11 @@ public class CalendarUtils {
     }
 
     private static int checkCalendarAccount(Context context) {
-        Cursor userCursor = context.getContentResolver().query(Uri.parse(CALENDAR_URL),
-                null, null, null, null);
+        Cursor userCursor = null;
         try {
+            userCursor = context.getContentResolver().query(Uri.parse(CALENDAR_URL),
+                    null, null, null, null);
+
             if (userCursor == null) { // 查询返回空值
                 return -1;
             }
@@ -66,6 +68,9 @@ public class CalendarUtils {
             } else {
                 return -1;
             }
+        } catch (Exception e) {
+            //ignore
+            return -1;
         } finally {
             if (userCursor != null) {
                 userCursor.close();

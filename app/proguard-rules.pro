@@ -1,7 +1,7 @@
 # 实体类等
-#-keep class com.tincher.hkperformance.data.** { *; }
+-keep class com.dkaishu.tcraft.data.model.** { *; }
 # JavaScriptInterface 中，方法名不能混淆
-#-keep public class * extends com.tincher.hkperformance.base.BaseJavaScriptInterface
+#-keep public class * extends com.dkaishu.tcraft.base.BaseJavaScriptInterface
 
 -dontwarn android.support.v4.**
 

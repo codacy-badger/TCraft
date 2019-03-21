@@ -6,8 +6,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.dkaishu.tcraft.R;
-import com.dkaishu.tcraft.feature.main.MainActivity;
-import com.dkaishu.tcraft.feature.view_custom.CustomViewTestActivity;
 import com.dkaishu.tcraftlib.base.BaseActivity;
 import com.dkaishu.tcraftlib.widget.SelectorFactory;
 
@@ -28,17 +26,16 @@ public class ClickEntranceActivity extends BaseActivity {
 
 
     private void setData() {
-        entrances.add(new Entrance("MainActivity", MainActivity.class));
         entrances.add(new Entrance("定时任务", ScheduledTimerActivity.class));
-        entrances.add(new Entrance("文件下载", FileDownloadUploadActivity.class));
+        entrances.add(new Entrance("上传下载", FileDownloadUploadActivity.class));
         entrances.add(new Entrance("Http请求", HttpRequestActivity.class));
-        entrances.add(new Entrance("获取坐标", LocationActivity.class));
+//        entrances.add(new Entrance("获取坐标", LocationActivity.class));//存bug
         entrances.add(new Entrance("拍照选取", TakePhotoActivity.class));
         entrances.add(new Entrance("通知提醒", NotificationActivity.class));
         entrances.add(new Entrance("日历通知", CalendarActivity.class));
         entrances.add(new Entrance("LoadingDialog", LoadingDialogActivity.class));
         entrances.add(new Entrance("防误点击", TrimClickActivity.class));
-        entrances.add(new Entrance("自定义View", CustomViewTestActivity.class));
+//        entrances.add(new Entrance("自定义View", CustomViewTestActivity.class));
 
 
     }
