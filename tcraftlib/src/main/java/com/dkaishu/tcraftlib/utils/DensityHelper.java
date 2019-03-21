@@ -18,6 +18,9 @@ public class DensityHelper {
     private static float          appScaledDensity;
     private static DisplayMetrics appDisplayMetrics;
 
+    private static float          originAppDensity;
+    private static float          originAppScaledDensity;
+
     private DensityHelper() {
     }
 
@@ -26,12 +29,15 @@ public class DensityHelper {
         if (appDensity == 0) {
             appDensity = appDisplayMetrics.density;
             appScaledDensity = appDisplayMetrics.scaledDensity;
+            originAppDensity = appDensity;
+            originAppScaledDensity = appScaledDensity;
             application.registerComponentCallbacks(new ComponentCallbacks() {
                 @Override
                 public void onConfigurationChanged(Configuration newConfig) {
 
                     if (newConfig != null && newConfig.fontScale > 0) {
                         appScaledDensity = application.getResources().getDisplayMetrics().scaledDensity;
+                        originAppScaledDensity = appScaledDensity;
                     }
                 }
 
@@ -57,6 +63,19 @@ public class DensityHelper {
         activityDisplayMetrics.densityDpi = targetDensityDpi;
 
     }
+
+    /**
+     * 还原适配
+     * 应用场景如：原生页面和WebView结合，需保持与WebView表现一致
+     */
+    public static void setOriginDensity(@NonNull final Activity activity) {
+        if (appDensity == 0) return;
+        final DisplayMetrics activityDisplayMetrics = activity.getResources().getDisplayMetrics();
+        activityDisplayMetrics.density = originAppDensity;
+        activityDisplayMetrics.scaledDensity = originAppScaledDensity;
+        activityDisplayMetrics.densityDpi = (int) (160 * originAppDensity);
+    }
+
 
 
 }

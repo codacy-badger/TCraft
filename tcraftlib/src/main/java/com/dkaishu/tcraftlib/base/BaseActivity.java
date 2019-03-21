@@ -29,6 +29,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     protected abstract void initData();
 
+
     /**
      * 添加需要检测的权限
      */
@@ -49,7 +50,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        DensityHelper.setCustomDensity(BaseActivity.this);
+        if (needScreenAdapt) DensityHelper.setCustomDensity(BaseActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(setLayoutRes());
         if (isNeedCheckPermission) {
@@ -62,6 +63,22 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
         initView();
         initData();
+    }
+
+
+    /**
+     * 屏幕适配
+     */
+    private boolean needScreenAdapt = true;
+
+    /**
+     * 子类需在 onCreate 中 super.onCreate() 前调用
+     *
+     * @param needScreenAdapt
+     */
+    public void setNeedScreenAdapt(boolean needScreenAdapt) {
+        this.needScreenAdapt = needScreenAdapt;
+        DensityHelper.setOriginDensity(BaseActivity.this);
     }
 
     /**
