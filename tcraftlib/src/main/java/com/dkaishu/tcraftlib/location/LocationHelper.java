@@ -78,6 +78,7 @@ public class LocationHelper {
         criteria.setVerticalAccuracy(Criteria.NO_REQUIREMENT);//设置垂直方向精确度
 
         if (locationManager != null) {
+            //TODO GPS 可用与否的判断
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, mMinTime, mMinDistance, listener);
             List<String> providers = locationManager.getProviders(criteria, true);
             for (String provider : providers) {

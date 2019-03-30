@@ -38,6 +38,7 @@
         <activity android:name="com.dkaishu.tcraft.feature.sample.LoadingDialogActivity" />
         <activity android:name="com.dkaishu.tcraft.feature.sample.TrimClickActivity" />
         <activity android:name="com.dkaishu.tcraft.feature.view_custom.CustomViewTestActivity" />
+        <activity android:name=".feature.sample.CmdActivity" />
 
 
     </application>

@@ -35,6 +35,7 @@ public class ClickEntranceActivity extends BaseActivity {
         entrances.add(new Entrance("日历通知", CalendarActivity.class));
         entrances.add(new Entrance("LoadingDialog", LoadingDialogActivity.class));
         entrances.add(new Entrance("防误点击", TrimClickActivity.class));
+        entrances.add(new Entrance("Cmd", CmdActivity.class));
 //        entrances.add(new Entrance("自定义View", CustomViewTestActivity.class));
 
 
