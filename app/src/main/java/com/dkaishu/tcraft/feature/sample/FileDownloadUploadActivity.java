@@ -7,6 +7,7 @@ import com.dkaishu.tcraft.data.MyApiService;
 import com.dkaishu.tcraft.data.base.BaseHttpObserver;
 import com.dkaishu.tcraft.data.base.BaseResponse;
 import com.dkaishu.tcraftlib.base.BaseHttpActivity;
+import com.dkaishu.tcraftlib.network.FileType;
 import com.dkaishu.tcraftlib.network.RetrofitClient;
 import com.dkaishu.tcraftlib.network.download.DownloadListener;
 import com.dkaishu.tcraftlib.network.download.DownloadRetrofitClient;
@@ -99,13 +100,17 @@ public class FileDownloadUploadActivity extends BaseHttpActivity {
                 .subscribe(mDownLoadObserver);
     }
 
+    /**
+     * 上传文件
+     * @param file
+     */
     private void upload(File file) {
         Map<String, String> params = new HashMap<>();
         params.put("myKey", "myValue");
-
         RetrofitClient.getInstance().createService(MyApiService.class)
                 .upload(uploadUrl, MultipartBody.Part.createFormData("file", file.getName(),
-                        new UploadFileRequestBody<ResponseBody>(file, new FileUploadListener() {
+                        //具体的 MediaType 可直接添加
+                        new UploadFileRequestBody<ResponseBody>(file, FileType.getMIMEType(file),new FileUploadListener() {
                             @Override
                             public void onProgress(long bytesWritten, long contentLength) {
                                 int progress = (int) (bytesWritten / contentLength);

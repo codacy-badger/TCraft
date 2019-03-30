@@ -127,7 +127,7 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
     }
 
     /**
-     * 当Dialog dismiss时调动
+     * 当Dialog dismiss时调用
      * 可Override，以实现对Dialog dismiss的监听
      */
     protected void onDialogDismissed() {

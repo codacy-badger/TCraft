@@ -23,10 +23,10 @@ public class UploadFileRequestBody<T> extends RequestBody {
     private RequestBody mRequestBody;
 
 
-    public UploadFileRequestBody(File file, FileUploadListener fileUploadListener) {
+    public UploadFileRequestBody(File file, String mediaType ,FileUploadListener fileUploadListener) {
         this.file = file;
         this.fileUploadListener = fileUploadListener;
-        mRequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file); //multipart/form-data  || application/octet-stream
+        mRequestBody = RequestBody.create(MediaType.parse(mediaType), file); //multipart/form-data  || application/octet-stream
     }
 
     @Override
