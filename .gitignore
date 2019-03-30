@@ -3,7 +3,7 @@
 # 可以在前面添加正斜杠/来避免递归。例如/a仅在当前目录下忽略a文件， 但不包括子目录下的 b/a文件。
 # 可以在后面添加正斜杠/来忽略文件夹，例如build/即忽略build文件夹。
 # 可以使用!来否定忽略，即比如在前面用了*.apk，然后使用!a.apk，则这个a.apk不会被忽略。
-# 可以使用标准的 glob 模式（简化了的正则表达式）匹配 ：*用来匹配零个或多个字符，如*.[oa]忽略所有以".o"或".a"结尾，
+# 可以使用标准的 glob 模式（简化了的正则表达式，详见https://www.google.com/search?q=glob+%E6%A8%A1%E5%BC%8F）匹配 ：*用来匹配零个或多个字符，如*.[oa]忽略所有以".o"或".a"结尾，
 # *~忽略所有以~结尾的文件（这种文件通常被许多编辑器标记为临时文件）；[]用来匹配括号内的任一字符，如[abc]，也可以在括号内加连接符，如[0-9]匹配0至9的数；?用来匹配单个字符。
 
 
@@ -68,11 +68,6 @@ keystore/
 
 # Google Services (e.g. APIs or Firebase)
 google-services.json
-
-# Freeline 是 Android 平台上的秒级编译方案，Instant Run 的替代品, 由阿里蚂蚁聚宝 Android 团队开发。不支持 Kotlin，暂不考虑
-#freeline.py
-#freeline/
-#freeline_project_description.json
 
 # Generated files
 antLauncher/bin
