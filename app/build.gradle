@@ -15,9 +15,9 @@ buildscript {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':tcraftlib')
     implementation rootProject.ext.baseDependencies.kotlin
-
+    implementation project(':tcraftlib')
+//    implementation 'com.github.Dkaishu:TCraft:v1.0'
 
 //    testImplementation 'junit:junit:4.12'
 //    androidTestImplementation 'com.android.support.test:runner:1.0.2'
