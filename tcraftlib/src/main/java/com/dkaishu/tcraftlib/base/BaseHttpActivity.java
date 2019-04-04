@@ -116,6 +116,7 @@ public abstract class BaseHttpActivity extends BaseActivity implements BaseHandl
         if (null == mLoadingDialog) {
             mLoadingDialog = new LoadingDialog(BaseHttpActivity.this);
             mLoadingDialog.setCanceledOnTouchOutside(false);
+            mLoadingDialog.setCancelable(false);
             mLoadingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
