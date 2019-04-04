@@ -109,3 +109,5 @@ demo 会在 app module 下陆续添加
 - lib 初始化：TLibManager
   - 各种路径，baseURL等
 - TCraft 中依赖库的初始化
+
+-足够成熟后以远程库的形式提供
