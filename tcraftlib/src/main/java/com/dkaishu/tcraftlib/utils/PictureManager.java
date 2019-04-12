@@ -74,7 +74,7 @@ public class PictureManager {
      */
     public static String getFileProviderName(@NonNull Activity activity) throws PackageManager.NameNotFoundException {
         ApplicationInfo appInfo = activity.getPackageManager().getApplicationInfo(activity.getPackageName(), PackageManager.GET_META_DATA);
-        return appInfo.metaData.getString("provider_name");
+        return appInfo.metaData.getString("provider_name_tcraft");
     }
 
     public static void selectPicFromAlbumForResult(@NonNull Activity activity, int requestCode) {

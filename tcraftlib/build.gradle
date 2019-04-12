@@ -1,50 +1,50 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.Dkaishu'
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
 
-    api rootProject.ext.supportDependencies.supportAppcompat
-    api rootProject.ext.supportDependencies.supportV4
-    api rootProject.ext.supportDependencies.supportDesign
-    api rootProject.ext.supportDependencies.supportCardview
-    api rootProject.ext.supportDependencies.supportConstraintLayout
 
-    debugApi rootProject.ext.baseDependencies.debugLeakcanary
-    releaseApi rootProject.ext.baseDependencies.releaseLeakcanary
+    api "com.android.support:appcompat-v7:27.1.1"
+    api "com.android.support:support-v4:27.1.1"
+    api "com.android.support:design:27.1.1"
+    api "com.android.support:cardview-v7:27.1.1"
 
-    debugApi rootProject.ext.baseDependencies.debugChuck
-    releaseApi rootProject.ext.baseDependencies.releaseChuck
 
-    api rootProject.ext.baseDependencies.retrofit2
-    api rootProject.ext.baseDependencies.adapterRxjava2
-    api rootProject.ext.baseDependencies.retrofitGson
-    api rootProject.ext.baseDependencies.rxandroid
-    api rootProject.ext.baseDependencies.rxlifecycle2
-    api rootProject.ext.baseDependencies.rxlifecycleComponents
+    debugApi "com.squareup.leakcanary:leakcanary-android:1.5.4"
+    releaseApi "com.squareup.leakcanary:leakcanary-android-no-op:1.5.4"
 
-    api rootProject.ext.extensionDependencies.utilcode
-    api rootProject.ext.extensionDependencies.baseQuickAdapter
+    debugApi "com.readystatesoftware.chuck:library:1.1.0"
+    releaseApi "com.readystatesoftware.chuck:library:1.1.0"
 
-//    api rootProject.ext.extensionDependencies.glide
-//    api rootProject.ext.extensionDependencies.easypermissions
-//    api rootProject.ext.extensionDependencies.eventbus
+    api "io.reactivex.rxjava2:rxandroid:2.0.2"
+    api "com.trello.rxlifecycle2:rxlifecycle:2.2.2"
+    api "com.trello.rxlifecycle2:rxlifecycle-components:2.2.2"
 
+    api "com.squareup.retrofit2:retrofit:2.3.0"
+    api "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
+    api "com.squareup.retrofit2:converter-gson:2.3.0"
+
+
+    api "com.blankj:utilcode:1.22.7"
+    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.38"
 
 }
 
-def mProviderName = rootProject.ext.android.providerName
-def mApplicationName = rootProject.ext.android.applicationName
+def mProviderName = "com.dkaishu.tcraftlib.fileProvider"
+def mApplicationName = "TCraft"
 
 android {
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    compileSdkVersion 27
 
     defaultConfig {
-        minSdkVersion rootProject.ext.android.minSdkVersion
-        targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode rootProject.ext.android.versionCodeLib
-        versionName rootProject.ext.android.versionNameLib
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0.0"
 
-        ndk { abiFilters "armeabi", "x86" }
+//        ndk { abiFilters "armeabi", "x86" }
 
         buildConfigField "String", "mApplicationName", "\"${mApplicationName}\""
 
@@ -54,12 +54,12 @@ android {
         release {
             minifyEnabled false
 
-            manifestPlaceholders = [provider_name: "${mProviderName}"]
+            manifestPlaceholders = [provider_name_tcraft: "${mProviderName}"]
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug{
-            manifestPlaceholders = [provider_name: "${mProviderName}"]
+        debug {
+            manifestPlaceholders = [provider_name_tcraft: "${mProviderName}"]
 
         }
     }

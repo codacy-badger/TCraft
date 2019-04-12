@@ -20,17 +20,17 @@
     <application>
 
         <meta-data
-            android:name="provider_name"
-            android:value="${provider_name}"/>
+            android:name="provider_name_tcraft"
+            android:value="${provider_name_tcraft}"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="${provider_name}"
+            android:authorities="${provider_name_tcraft}"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
+                android:resource="@xml/provider_paths_tcraftlib" />
         </provider>
 
     </application>
