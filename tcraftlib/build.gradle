@@ -56,7 +56,8 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-
+            zipAlignEnabled false
+            shrinkResources false
             manifestPlaceholders = [provider_name_tcraft: "${mProviderName}"]
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

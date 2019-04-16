@@ -3,6 +3,13 @@
 # JavaScriptInterface 中，方法名不能混淆
 #-keep public class * extends com.tincher.hkperformance.base.BaseJavaScriptInterface
 
+
+#
+-keep class com.dkaishu.tcraft.** { *; }
+-keepclassmembers class com.dkaishu.tcraft.** { *; }
+-dontwarn com.dkaishu.tcraft.**
+
+
 -dontwarn android.support.v4.**
 
 -dontskipnonpubliclibraryclasses # 不忽略非公共的库类
@@ -156,6 +163,9 @@ public static java.lang.String TABLENAME;
 ## RxLifeCycle
 -keep class com.trello.rxlifecycle2.** { *; }
 -keep interface com.trello.rxlifecycle2.** { *; }
+
+-keep class com.trello.rxlifecycle2.components.** { *; }
+-keep interface com.trello.rxlifecycle2.components.** { *; }
 
 
 ##RxPermissions
