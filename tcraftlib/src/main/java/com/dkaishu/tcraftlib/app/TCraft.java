@@ -5,7 +5,6 @@ import android.content.Context;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
-import com.squareup.leakcanary.LeakCanary;
 import com.dkaishu.tcraftlib.BuildConfig;
 import com.dkaishu.tcraftlib.location.LocationHelper;
 import com.dkaishu.tcraftlib.utils.DensityHelper;
@@ -27,7 +26,7 @@ public class TCraft extends AppContext {
 
     private void initTCraft() {
 
-        LeakCanary.install(this);
+//        LeakCanary.install(this);
 
         //屏幕适配
         DensityHelper.setCustomDensity(getsAppContext());
@@ -43,14 +42,14 @@ public class TCraft extends AppContext {
     }
 
 
-    static class TCraftManager {
+   public static class TCraftManager {
 
-        static boolean isMainProcess(Context context) {
+       public  static boolean isMainProcess(Context context) {
             return context.getPackageName().equals(getCurrentProcessName(context));
         }
 
 
-        static String getCurrentProcessName(Context context) {
+       public static String getCurrentProcessName(Context context) {
             int             pid         = android.os.Process.myPid();
             String          processName = "";
             ActivityManager manager     = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);

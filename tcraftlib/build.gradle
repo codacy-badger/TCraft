@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.Dkaishu'
 
 
 dependencies {
@@ -10,11 +12,11 @@ dependencies {
     api rootProject.ext.supportDependencies.supportCardview
     api rootProject.ext.supportDependencies.supportConstraintLayout
 
-    debugApi rootProject.ext.baseDependencies.debugLeakcanary
-    releaseApi rootProject.ext.baseDependencies.releaseLeakcanary
-
-    debugApi rootProject.ext.baseDependencies.debugChuck
-    releaseApi rootProject.ext.baseDependencies.releaseChuck
+//    debugApi rootProject.ext.baseDependencies.debugLeakcanary
+//    releaseApi rootProject.ext.baseDependencies.releaseLeakcanary
+//
+//    debugApi rootProject.ext.baseDependencies.debugChuck
+//    releaseApi rootProject.ext.baseDependencies.releaseChuck
 
     api rootProject.ext.baseDependencies.retrofit2
     api rootProject.ext.baseDependencies.adapterRxjava2

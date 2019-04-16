@@ -1,8 +1,5 @@
 package com.dkaishu.tcraftlib.network.download;
 
-import com.readystatesoftware.chuck.ChuckInterceptor;
-import com.dkaishu.tcraftlib.BuildConfig;
-import com.dkaishu.tcraftlib.app.AppContext;
 import com.dkaishu.tcraftlib.app.TLibManager;
 import com.dkaishu.tcraftlib.config.NetConfig;
 import com.dkaishu.tcraftlib.network.AccessToken;
@@ -39,9 +36,6 @@ public class DownloadRetrofitClient {
 
         OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
 
-        if (BuildConfig.DEBUG) {
-            okHttpClientBuilder.addInterceptor(new ChuckInterceptor(AppContext.getsAppContext()));
-        }
 
         if (downloadListener != null) {
             okHttpClientBuilder.addInterceptor(new DownloadInterceptor(downloadListener));

@@ -1,7 +1,5 @@
 package com.dkaishu.tcraftlib.app;
 
-import android.os.Environment;
-
 /**
  * Todo 初始化相关配置
  * Lib使用时需要初始化及管理的部分
@@ -10,7 +8,7 @@ import android.os.Environment;
 
 public class TLibManager {
     private static String baseUrl     = "http://dkaishu.com";
-    private static String logFilePath = Environment.getExternalStorageDirectory().getPath() + "/TCraft/log";
+    private static String logFilePath = AppContext.getsAppContext().getExternalFilesDir(null).getPath() + "/TCraft/log";
 
     public static void init(TBuilder builder) {
         baseUrl = builder.baseUrl;

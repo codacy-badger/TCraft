@@ -16,6 +16,12 @@ buildscript {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.baseDependencies.kotlin
+    debugImplementation rootProject.ext.baseDependencies.debugLeakcanary
+    releaseImplementation rootProject.ext.baseDependencies.releaseLeakcanary
+
+    debugImplementation rootProject.ext.baseDependencies.debugChuck
+    releaseImplementation rootProject.ext.baseDependencies.releaseChuck
+
     implementation project(':tcraftlib')
 //    implementation 'com.github.Dkaishu:TCraft:v1.4'
 

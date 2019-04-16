@@ -1,7 +1,5 @@
 package com.dkaishu.tcraftlib.network;
 
-import com.readystatesoftware.chuck.ChuckInterceptor;
-import com.dkaishu.tcraftlib.BuildConfig;
 import com.dkaishu.tcraftlib.app.AppContext;
 import com.dkaishu.tcraftlib.app.TLibManager;
 import com.dkaishu.tcraftlib.config.NetConfig;
@@ -62,8 +60,8 @@ public class RetrofitClient {
 
             OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
             //
-            if (BuildConfig.DEBUG) {
-                okHttpClientBuilder.addInterceptor(new ChuckInterceptor(AppContext.getsAppContext()));
+//            if (BuildConfig.DEBUG) {
+//                okHttpClientBuilder.addInterceptor(new ChuckInterceptor(AppContext.getsAppContext()));
 
 /*                okHttpClientBuilder.addNetworkInterceptor(new Interceptor() {
                     @Override
@@ -77,7 +75,7 @@ public class RetrofitClient {
                         return null;
                     }
                 });*/
-            }
+//            }
 
             if (!interceptors.isEmpty()) {
                 for (Interceptor interceptor : interceptors) {
