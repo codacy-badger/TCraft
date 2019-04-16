@@ -153,4 +153,24 @@ public static java.lang.String TABLENAME;
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
 
+## RxLifeCycle
+-keep class com.trello.rxlifecycle2.** { *; }
+-keep interface com.trello.rxlifecycle2.** { *; }
+
+
+##RxPermissions
+-keep class com.tbruyelle.rxpermissions2.** { *; }
+-keep interface com.tbruyelle.rxpermissions2.** { *; }
+
+##RxCache
+-dontwarn io.rx_cache2.internal.**
+-keep class io.rx_cache2.internal.Record { *; }
+-keep class io.rx_cache2.Source { *; }
+
+-keep class io.victoralbertos.jolyglot.** { *; }
+-keep interface io.victoralbertos.jolyglot.** { *; }
+
+
+
+
 -ignorewarnings
