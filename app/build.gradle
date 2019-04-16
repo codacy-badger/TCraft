@@ -34,6 +34,7 @@ def mApplicationName = rootProject.ext.android.applicationName
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
+    build
     defaultConfig {
         applicationId rootProject.ext.android.applicationId
         minSdkVersion rootProject.ext.android.minSdkVersion
