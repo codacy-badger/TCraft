@@ -1,6 +1,6 @@
 
 # TCraft
-[![](https://jitpack.io/v/Dkaishu/TCraft.svg)](https://jitpack.io/#Dkaishu/TCraft)
+[![](https://jitpack.io/v/Dkaishu/TCraft.svg)](https://jitpack.io/#Dkaishu/TCraft) &nbsp; [![Build Status](https://travis-ci.org/Dkaishu/TCraft.svg?branch=java)](https://travis-ci.org/Dkaishu/TCraft) &nbsp; [![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16) &nbsp; [![me](https://img.shields.io/badge/I'm-dks-brightgreen.svg)](http:\//dkaishu.com/) &nbsp;
 ## 简介
  Android快速开发框架 
  
