@@ -18,15 +18,15 @@ dependencies {
 //    debugApi rootProject.ext.baseDependencies.debugChuck
 //    releaseApi rootProject.ext.baseDependencies.releaseChuck
 
-    api rootProject.ext.baseDependencies.retrofit2
-    api rootProject.ext.baseDependencies.adapterRxjava2
-    api rootProject.ext.baseDependencies.retrofitGson
-    api rootProject.ext.baseDependencies.rxandroid
-    api rootProject.ext.baseDependencies.rxlifecycle2
-    api rootProject.ext.baseDependencies.rxlifecycleComponents
+    compile rootProject.ext.baseDependencies.retrofit2
+    compile rootProject.ext.baseDependencies.adapterRxjava2
+    compile rootProject.ext.baseDependencies.retrofitGson
+    compile rootProject.ext.baseDependencies.rxandroid
+    compile rootProject.ext.baseDependencies.rxlifecycle2
+    compile rootProject.ext.baseDependencies.rxlifecycleComponents
 
-    api rootProject.ext.extensionDependencies.utilcode
-    api rootProject.ext.extensionDependencies.baseQuickAdapter
+    compile rootProject.ext.extensionDependencies.utilcode
+    compile rootProject.ext.extensionDependencies.baseQuickAdapter
 
 //    api rootProject.ext.extensionDependencies.glide
 //    api rootProject.ext.extensionDependencies.easypermissions

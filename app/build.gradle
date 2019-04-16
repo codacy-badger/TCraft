@@ -22,8 +22,8 @@ dependencies {
     debugImplementation rootProject.ext.baseDependencies.debugChuck
     releaseImplementation rootProject.ext.baseDependencies.releaseChuck
 
-//    implementation project(':tcraftlib')
-    implementation 'com.github.Dkaishu:TCraft:v1.5.2'
+    implementation project(':tcraftlib')
+//    implementation 'com.github.Dkaishu:TCraft:v1.5.3'
 
 //    testImplementation 'junit:junit:4.12'
 //    androidTestImplementation 'com.android.support.test:runner:1.0.2'
