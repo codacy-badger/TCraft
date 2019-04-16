@@ -1,3 +1,6 @@
+
+# TCraft
+[![](https://jitpack.io/v/Dkaishu/TCraft.svg)](https://jitpack.io/#Dkaishu/TCraft)
 ## 简介
  Android快速开发框架 
  
@@ -12,6 +15,7 @@
 		repositories {
 			...
 			maven { url 'https://jitpack.io' }
+			
 		}
 	}
 	
@@ -19,8 +23,10 @@
 2. 添加依赖
 注意版本必须不小于 v1.5.4 ，最新的版本信息可在 [这里查看](https://github.com/Dkaishu/TCraft/releases)
 ```
-dependencies {
+    dependencies {
+    
 	        implementation 'com.github.Dkaishu:TCraft:v1.5.4'
+	        
 	}
 ```
 3. 参照 sample 中的示例进行开发。
@@ -133,7 +139,17 @@ dependencies {
 demo 会在 app module 下陆续添加
 
 ## Todo
+- 编写相应示例
+
 
 - lib 初始化：TLibManager
   - 各种路径，baseURL等
+  
+  
+- 关于警告
+```
+WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation' and 'api'.
+It will be removed at the end of 2018. For more information see: http://d.android.com/r/tools/update-dependency-configurations.html
+Affected Modules: tcraftlib
+```
 
