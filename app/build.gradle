@@ -25,8 +25,8 @@ dependencies {
     implementation project(':tcraftlib')
 //    implementation 'com.github.Dkaishu:TCraft:v1.5.4'
 
-//    testImplementation 'junit:junit:4.12'
-//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
 
 }
 
@@ -60,23 +60,23 @@ android {
             v1SigningEnabled true
             v2SigningEnabled true
 
-            // gradle.properties 中统一配置签名文件和密码
-//            try {
-//                //签名证书文件
-//                storeFile file(STORE_FILE)
-//
-//                // 签名证书密码
-//                storePassword STORE_PASSWORD
-//
-//                // 别名
-//                keyAlias KEY_ALIAS
-//
-//                // 别名密码
-//                keyPassword KEY_PASSWORD
-//            }
-//            catch (ex) {
-//                throw new InvalidUserDataException("请在 gradle.properties 配置签名文件\n" + ex.message)
-//            }
+//             gradle.properties 中统一配置签名文件和密码
+            try {
+                //签名证书文件
+                storeFile file(STORE_FILE)
+
+                // 签名证书密码
+                storePassword STORE_PASSWORD
+
+                // 别名
+                keyAlias KEY_ALIAS
+
+                // 别名密码
+                keyPassword KEY_PASSWORD
+            }
+            catch (ex) {
+                throw new InvalidUserDataException("请在 gradle.properties 配置签名文件\n" + ex.message)
+            }
         }
 
         debug {
