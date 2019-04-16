@@ -57,8 +57,8 @@ android {
         release {
 
             // v1、v2 全选即可
-//            v1SigningEnabled true
-//            v2SigningEnabled true
+            v1SigningEnabled true
+            v2SigningEnabled true
 
             // gradle.properties 中统一配置签名文件和密码
 //            try {
@@ -115,11 +115,11 @@ android {
             /**
              * 重命名apk文件，命名方式：名称+渠道名+版本号+版本名称+打包时间
              */
-            applicationVariants.all { variant ->
-                variant.outputs.all { output ->
-                    outputFileName = "${mApplicationName}_${variant.name}_${variant.versionCode}_${variant.versionName}_${releaseTime()}.apk"
-                }
-            }
+//            applicationVariants.all { variant ->
+//                variant.outputs.all { output ->
+//                    outputFileName = "${mApplicationName}_${variant.name}_${variant.versionCode}_${variant.versionName}_${releaseTime()}.apk"
+//                }
+//            }
         }
         debug {
 
@@ -128,11 +128,11 @@ android {
             minifyEnabled false
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            applicationVariants.all { variant ->
-                variant.outputs.all { output ->
-                    outputFileName = "${mApplicationName}_${variant.name}_${variant.versionCode}_${variant.versionName}_${releaseTime()}.apk"
-                }
-            }
+//            applicationVariants.all { variant ->
+//                variant.outputs.all { output ->
+//                    outputFileName = "${mApplicationName}_${variant.name}_${variant.versionCode}_${variant.versionName}_${releaseTime()}.apk"
+//                }
+//            }
         }
     }
 
