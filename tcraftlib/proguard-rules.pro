@@ -163,10 +163,6 @@ public static java.lang.String TABLENAME;
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
 
-## RxLifeCycle
--keep class com.trello.rxlifecycle2.** { *; }
--keep interface com.trello.rxlifecycle2.** { *; }
-
 -keep class com.trello.rxlifecycle2.components.** { *; }
 -keep interface com.trello.rxlifecycle2.components.** { *; }
 
