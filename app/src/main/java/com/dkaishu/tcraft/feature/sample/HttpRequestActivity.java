@@ -40,7 +40,11 @@ public class HttpRequestActivity extends BaseHttpActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(this.bindToLifecycle())
-                .doOnSubscribe(disposable -> showLoadingDialog())
+                .doOnSubscribe(disposable ->{
+                            showLoadingDialog();
+                            getLoadingDialog().setCancelable(true);
+                }
+                )
                 .doFinally(this::dismissLoadingDialog)
                 .subscribe(new BaseHttpObserver<Categories>() {
                     @Override
@@ -48,6 +52,12 @@ public class HttpRequestActivity extends BaseHttpActivity {
                         Log.d(TAG, "onSuccess: "+String.valueOf(categories.getResults().size()));
                     }
                     //可override其他方法
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        getLoadingDialog().setCancelable(true);
+                    }
                 });
     }
 }

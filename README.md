@@ -1,5 +1,33 @@
-## 使用
-1.导入
+## 简介
+ Android快速开发框架 
+ 
+ 关键词：Material Design 、RxJava2 、 Retrofit2 、 [AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode) 、 [BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
+ 
+ 配合 kotlin 可获得最佳体验；
+ 
+## 使用方式一：
+1. 确保项目根目录中的 build.gradle 中已添加：
+```
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+	
+```
+2. 添加依赖
+注意版本必须不小于 v1.5.4 ，最新的版本信息可在 [这里查看](https://github.com/Dkaishu/TCraft/releases)
+```
+dependencies {
+	        implementation 'com.github.Dkaishu:TCraft:v1.5.4'
+	}
+```
+3. 参照 sample 中的示例进行开发。
+
+
+## 使用方式二：下载库文件到本地，更灵活
+1. 导入
 - 将 tcraftlib文件夹复制到项目根目录
 ```
     build.gradle、config.gradle、.gitignore 也复制到根目录
@@ -73,7 +101,7 @@
 
     ​
 
-2.依赖库
+2. 依赖库
 
 目前已集成以下库，无需再次配置，可直接使用（具体项请文件内查看）
 
@@ -83,11 +111,11 @@
     api rootProject.ext.supportDependencies.supportDesign
     api rootProject.ext.supportDependencies.supportConstraintLayout
 
-    debugApi rootProject.ext.baseDependencies.debugLeakcanary
-    releaseApi rootProject.ext.baseDependencies.releaseLeakcanary
+    <!--debugApi rootProject.ext.baseDependencies.debugLeakcanary-->
+    <!--releaseApi rootProject.ext.baseDependencies.releaseLeakcanary-->
 
-    debugApi rootProject.ext.baseDependencies.debugChuck
-    releaseApi rootProject.ext.baseDependencies.releaseChuck
+    <!--debugApi rootProject.ext.baseDependencies.debugChuck-->
+    <!--releaseApi rootProject.ext.baseDependencies.releaseChuck-->
 
     api rootProject.ext.baseDependencies.retrofit
     api rootProject.ext.baseDependencies.adapterRxjava2
@@ -100,7 +128,7 @@
     api rootProject.ext.extensionDependencies.baseQuickAdapter
 ```
 
-3.开发
+3. 开发
 
 demo 会在 app module 下陆续添加
 
@@ -108,6 +136,4 @@ demo 会在 app module 下陆续添加
 
 - lib 初始化：TLibManager
   - 各种路径，baseURL等
-- TCraft 中依赖库的初始化
 
--足够成熟后以远程库的形式提供

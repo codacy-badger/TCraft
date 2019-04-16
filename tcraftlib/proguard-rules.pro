@@ -5,9 +5,9 @@
 
 
 #
--keep class com.dkaishu.tcraft.** { *; }
--keepclassmembers class com.dkaishu.tcraft.** { *; }
--dontwarn com.dkaishu.tcraft.**
+#-keep class com.dkaishu.tcraft.** { *; }
+#-keepclassmembers class com.dkaishu.tcraft.** { *; }
+#-dontwarn com.dkaishu.tcraft.**
 
 
 -dontwarn android.support.v4.**
@@ -96,6 +96,9 @@
 }
 # Ignore annotation used for build tooling.
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
+-if interface * { @retrofit2.http.* <methods>; }
+-keep,allowobfuscation interface <1>
 
 # utilcode
 -keep class com.blankj.utilcode.** { *; }
